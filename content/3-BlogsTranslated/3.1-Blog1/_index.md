@@ -1,126 +1,120 @@
 ---
-title: "Blog 1"
-date: 2025-01-01
-weight: 1
+title: "Blog 1 "
+date: 2025-08-26
+weight: 3
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+# AWS services scale to new heights for Prime Day 2025: key metrics and milestones
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+- AWS provided the backbone infrastructure, scaling to handle unprecedented traffic and transactions.
 
 ---
 
-## Architecture Guidance
+## Record-Breaking Metrics:
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+- AWS Outposts: Sent 524M+ commands to 7,000 robots, peaking at 8M commands/hour (+160% vs 2024).
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+- Amazon EC2 (Graviton): Powered 40%+ of Amazon.com compute; deployed 87,000 Inferentia & Trainium chips for AI workloads.
 
-**The solution architecture is now as follows:**
+- Amazon SageMaker: Processed 626B inference requests.
 
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+- Amazon ECS + Fargate: Averaged 18.4M tasks/day, +77% vs 2024.
 
----
+- AWS Lambda: Handled 1.7T invocations/day.
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+- Amazon API Gateway: Processed 1T internal requests/day, +30% YoY.
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+- Amazon CloudFront: Delivered 3T HTTP requests, +43% vs 2024.
 
----
+- Amazon EBS: Peaked at 20.3T I/O ops, moving nearly 1 exabyte/day.
 
-## Technology Choices and Communication Scope
+- Amazon Aurora: 500B transactions, 4,071 TB stored, 999 TB transferred.
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+- Amazon DynamoDB: Peaked at 151M requests/sec, sustaining tens of trillions of API calls.
 
----
+- Amazon ElastiCache: Served 1.5 quadrillion daily requests and 1.4T per minute.
 
-## The Pub/Sub Hub
+- Amazon Kinesis: Peaked at 807M records/sec.
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+- Amazon SQS: Hit 166M messages/sec.
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+- Amazon GuardDuty: Monitored 8.9T log events/hour (+48.9% vs 2024).
 
----
+- AWS CloudTrail: Processed 2.5T events, up from 976B in 2024.
 
-## Core Microservice
+## Preparing to Scale – AWS Countdown:
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+- Formerly known as AWS Infrastructure Event Management (IEM).
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+- Comprehensive support for:
 
----
+- Operational readiness & risk mitigation.
 
-## Front Door Microservice
+- Generative AI implementation.
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+- Migration & modernization (including mainframe).
 
----
+- Infrastructure optimization for elections, retail, healthcare, sports, and gaming.
 
-## Staging ER7 Microservice
+## 🌍 Global Impact & Customer Experience
 
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
+- **Customer Savings:** Prime members worldwide saved billions of dollars across diverse categories from electronics to household essentials.
 
----
+- **Reach:** Tens of millions of Prime members shopped globally, with participation spanning over 20 countries.
 
-## New Features in the Solution
+- **Sustainability:** Amazon leveraged renewable energy-powered AWS data centers and optimized delivery routes, reducing carbon emissions during the event.
 
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+## 🛒AI-Powered Shopping Transformation
+
+- **Alexa+:** Millions of customers used the new voice-first shopping assistant to ask questions, discover deals, and place orders.
+
+- **Rufus AI Assistant:** Delivered personalized recommendations in real time, backed by 87,000 Inferentia & Trainium chips.
+
+- **AI Shopping Guides:** Helped customers compare products quickly, leading to higher conversion rates and customer satisfaction.
+
+## 📈Engineering & Operational Excellence
+
+- **Fault Resilience:** Over 6,800 AWS FIS experiments were conducted to simulate outages and guarantee 99.99% uptime.
+
+- **Global CDN:** Amazon CloudFront reduced latency for customers across continents, ensuring sub-second response times even at traffic peaks.
+
+- **Hybrid Deployments:** AWS Outposts supported fulfillment centers with low-latency robotics control, while AWS Regions handled massive web traffic.
+
+ ## 🧩Lessons & Takeaways
+
+- **Elastic Scalability:** AWS proved its ability to scale to record-breaking levels without disruption, showing enterprises how to prepare for Black Friday, holiday sales, and large-scale launches.
+
+- **Generative AI Integration:** Prime Day highlighted the future of retail: personalized, conversational, AI-assisted shopping experiences at global scale.
+
+- **Blueprint for Others:** Enterprises can replicate these best practices using AWS Countdown for migration, modernization, and high-stakes events.
+
+### 📊 Prime Day 2024 vs 2025 – AWS Key Metrics
+
+| Service / Metric                | Prime Day 2024                | Prime Day 2025                       | Growth / Change |
+|---------------------------------|--------------------------------|---------------------------------------|-----------------|
+| **AWS Outposts (Robot commands)** | ~201M commands/hour (baseline) | 524M+ total; 8M/hour peak             | +160%           |
+| **Amazon EC2 (Graviton)**        | ~30% of compute                | 40%+ of compute                       | +10% share      |
+| **Inferentia & Trainium**        | Tens of thousands deployed     | 87,000 chips deployed                 | Major increase  |
+| **Amazon SageMaker**             | ~300B inference requests       | 626B inference requests               | +108%           |
+| **Amazon ECS + Fargate**         | ~10.4M tasks/day               | 18.4M tasks/day                       | +77%            |
+| **AWS Lambda**                   | ~1T invocations/day            | 1.7T invocations/day                  | +70%            |
+| **API Gateway**                  | ~770B requests/day             | 1T requests/day                       | +30%            |
+| **Amazon CloudFront**            | 2.1T HTTP requests             | 3T HTTP requests                      | +43%            |
+| **Amazon EBS**                   | ~12T I/O ops peak              | 20.3T I/O ops peak (~1 exabyte/day)   | +69%            |
+| **Amazon Aurora**                | ~300B transactions             | 500B transactions                     | +67%            |
+| **Amazon DynamoDB**              | ~100M requests/sec peak        | 151M requests/sec peak                | +51%            |
+| **Amazon ElastiCache**           | ~1 quadrillion requests/day    | 1.5 quadrillion/day; 1.4T/min peak    | +50%            |
+| **Amazon Kinesis**               | ~500M records/sec peak         | 807M records/sec                      | +61%            |
+| **Amazon SQS**                   | ~120M messages/sec peak        | 166M messages/sec                     | +38%            |
+| **Amazon GuardDuty**             | ~6T log events/hour            | 8.9T log events/hour                  | +48.9%          |
+| **AWS CloudTrail**               | 976B events processed          | 2.5T events processed                 | +156%           |
+
+### 🧾 References / Evidences
+
+- **Prime Day 2024 data:** “How AWS powered Prime Day 2024 for record-breaking sales” – AWS Blog  
+  (https://aws.amazon.com/blogs/aws/how-aws-powered-prime-day-2024-for-record-breaking-sales/?utm_source=chatgpt.com)  
+- **Prime Day 2025 data:** “AWS services scale to new heights for Prime Day 2025: key metrics and milestones” – AWS Blog  
+  (https://aws.amazon.com/blogs/aws/aws-services-scale-to-new-heights-for-prime-day-2025-key-metrics-and-milestones/)
