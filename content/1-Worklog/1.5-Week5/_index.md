@@ -5,53 +5,70 @@ weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
-### Week 5 Objectives:
-
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
-
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+### **Week 5 Objectives**
 
-### Week 5 Achievements:
+* Understand IAM basics: users, roles, and permission policies.
+* Learn how Amazon Cognito handles app user authentication.
+* Get familiar with AWS Organizations for multi-account management.
+* Use AWS Identity Center (SSO) for centralized access control.
+* Understand KMS for encryption key management.
+* Distinguish responsibility levels across AWS services.
+* Grasp the Shared Responsibility Model and the shift toward managed services.
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+| Day | Task                       | Start Date | Completion Date | Reference Material                                                                                          |
+| --- | -------------------------- | ---------- | --------------- | ----------------------------------------------------------------------------------------------------------- |
+| 2   | Share Responsibility Model | 10/09/2025 | 10/09/2025      | [YouTube Video](https://www.youtube.com/watch?v=tsobAlSg19g&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=150) |
+| 3   | IAM                        | 10/10/2025 | 10/10/2025      | cont                                                                                                        |
+| 4   | Cognito                    | 10/11/2025 | 10/11/2025      | cont                                                                                                        |
+| 5   | AWS Organizations, SSO     | 10/12/2025 | 10/12/2025      | cont                                                                                                        |
+| 6   | KMS, ECS, EKS              | 10/13/2025 | 10/13/2025      | cont                                                                                                        |
 
-* Successfully created and configured an AWS Free Tier account.
+### Understood what AWS is and mastered the basic service groups:
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* **AWS Identity and Access Management (IAM)**
+* **Amazon Cognito – User Authentication for Applications**
+* **AWS Organizations – Multi-Account Management**
+* **AWS Identity Center (AWS SSO)**
+* **AWS Key Management Service (KMS) – Encryption Key Management**
+* **Service Responsibility Levels: Infrastructure / Container / Fully Managed**
+* **Summary of Shared Responsibility and Trend Toward Managed Services**
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+#### **AWS Identity and Access Management (IAM)**
 
-* Used AWS CLI to perform basic operations such as:
+* Controls identities and permissions for users, groups, and roles.
+* Core principle: **Least Privilege** – grant only the needed permissions.
+* Avoid using the  **root account** ; use IAM roles/users instead.
+* Permissions are defined through IAM policies (managed, custom, inline).
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+#### **Amazon Cognito – User Authentication for Applications**
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Provides user sign-up, sign-in, and identity management for web/mobile apps.
+* Supports MFA, OAuth2, SAML, and OpenID Connect.
+* Helps offload authentication so you don’t build it from scratch.
+
+#### **AWS Organizations – Multi-Account Management**
+
+* Centralized management for multiple AWS accounts.
+* Enables cost control, consolidated billing, and security boundaries.
+* Uses **Service Control Policies (SCPs)** to enforce organization-wide permissions.
+
+#### **AWS Identity Center (AWS SSO)**
+
+* Simplifies login with **single sign-on** across accounts and applications.
+* Allows assignment of roles to users from internal or external directories.
+* Reduces reliance on IAM users and long-term access keys.
+
+#### **AWS Key Management Service (KMS)**
+
+* Creates and manages encryption keys for AWS services.
+* Integrates with S3, EBS, RDS, DynamoDB, Lambda.
+* Provides auditing via CloudTrail for key usage.
+* Supports both AWS-managed and customer-managed keys.
+
+#### **Service Responsibility Levels**
+
+* **Infrastructure services** ( EC2): Customer manages OS, patching, network config.
+* **Container services** (ECS/EKS): AWS manages infra; customer manages containers.
+* **Fully managed services** (S3, DynamoDB, Lambda): AWS handles almost everything; customer focuses on data.

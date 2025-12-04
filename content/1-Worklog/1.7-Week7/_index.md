@@ -5,53 +5,66 @@ weight: 1
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 7 Objectives:
 
 * Connect and get acquainted with members of First Cloud Journey.
 * Understand basic AWS services, how to use the console & CLI.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task                                                               | Start Date | Completion Date | Reference Material     |
+| --- | ------------------------------------------------------------------ | ---------- | --------------- | ---------------------- |
+| 2   | Lab22 – VPC + EC2 + Lambda + Slack Automation                     | 10/16/2025 | 10/16/2025      | Module 05 – Lab22     |
+| 3   | Lab28 – IAM User/Policy/Role + Switch Role + Tag-based EC2 Access | 10/17/2025 | 10/17/2025      | Module 05 – Lab28     |
+| 4   | Lab30 – IAM Restriction (User Limits)                             | 10/18/2025 | 10/18/2025      | Module 05 – Lab30     |
+| 5   | Lab33 – KMS + CloudTrail + Athena                                 | 10/19/2025 | 10/19/2025      | Module 05 – Lab33     |
+| 6   | Lab44 + Lab48 – Advanced IAM + EC2/S3 Access                      | 10/20/2025 | 10/20/2025      | Module 05 _ Lab44 & 48 |
 
-### Week 7 Achievements:
+### **Week 7 Achievements**
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Gained a clear understanding of AWS and cloud computing.
+* Learned core AWS service groups (Compute, Storage, Networking, Database, Security).
+* Completed hands-on labs with IAM, EC2, S3, VPC, KMS, CloudTrail, Lambda, and Athena.
+* Built practical skills in automation, access control, encryption, and log analysis.
+* Improved knowledge of AWS best practices for security and resource management.
 
-* Successfully created and configured an AWS Free Tier account.
+### **VPC + EC2 + Lambda + Slack Automation**
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Create VPC, SG, EC2
+* Configure Slack Webhook
+* Create IAM Role for Lambda
+* Lambda functions to Start/Stop EC2
+* Test & Cleanup
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+### **IAM User/Policy/Role + Switch Role + Tag-based EC2 Access**
 
-* Used AWS CLI to perform basic operations such as:
+* Create IAM User
+* Create Custom IAM Policy
+* Create IAM Role
+* Switch Role
+* Control EC2 access using Tags
+* Cleanup
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+### **IAM Restriction (User Limits)**
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Create Restriction Policy
+* Create Limited IAM User
+* Permission Testing
+* Cleanup
+
+### **KMS + CloudTrail + Athena**
+
+* Create KMS Key
+* Create S3 Bucket & upload encrypted data
+* Enable CloudTrail logging to S3
+* Query CloudTrail logs with Athena
+* Cleanup
+
+### **Advanced IAM + EC2/S3 Access**
+
+* Create IAM Group/User + Admin Role
+* Configure Switch Role (IP & Time restrictions)
+* Create EC2 instance + S3 bucket
+* IAM User Access Key testing
+* Use IAM Role for EC2 to access S3
+* Cleanup

@@ -5,23 +5,26 @@ weight: 1
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-### Week 4 Objectives:
-
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
-
 ### Tasks to be carried out this week:
+
+### **Week 4 Objectives**
+
+* Understand Amazon S3 fundamentals and storage classes.
+* Learn advanced S3 features: static hosting, versioning, Access Points, VPC Endpoints, Glacier.
+* Explore AWS Snow Family for large-scale data migration.
+* Understand Storage Gateway for hybrid storage setups.
+* Learn DR strategies and use AWS Backup for automated backups.
+* Practice through labs: S3, VM Import/Export, Storage Gateway, FSx, and S3 + CloudFront.
 
 | Day | Task                                                                                                                          | Start Date | Completion Date | Reference Material |
 | --- | ----------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
-| 2   | Amazon S3 (Simple Storage Service)                                                                                            | 08/11/2025 | 08/11/2025      |                    |
-| 3   | Amazon S3 – Advanced Features                                                                                                | 08/12/2025 | 08/12/2025      |                    |
-| 4   | AWS Snow Family<br />AWS Storage Gateway<br />Disaster Recovery on AWS<br />AWS Backup                                        | 08/13/2025 | 08/13/2025      |                    |
-| 5   | Lab<br />(S3 & Backup)<br />VM Import/Export<br />Storage Gateway<br />FSx (Windows File System)<br />S3 Website & CloudFront | 08/14/2025 | 08/15/2025      |                    |
-| 6   | Weekly Knowledge Summary                                                                                                      | 08/15/2025 | 08/15/2025      |                    |
+| 2   | Amazon S3 (Simple Storage Service)                                                                                            | 10/02/2025 | 10/02/2025      |                    |
+| 3   | Amazon S3 – Advanced Features                                                                                                | 10/03/2025 | 10/03/2025      |                    |
+| 4   | AWS Snow Family<br />AWS Storage Gateway<br />Disaster Recovery on AWS<br />AWS Backup                                        | 10/04/2025 | 10/04/2025      |                    |
+| 5   | Lab<br />(S3 & Backup)<br />VM Import/Export<br />Storage Gateway<br />FSx (Windows File System)<br />S3 Website & CloudFront | 10/05/2025 | 10/05/2025      |                    |
+| 6   | Weekly Knowledge Summary                                                                                                      | 10/06/2025 | 10/06/2025      |                    |
 
 ### Week 4 Achievements:
-
 
 # Amazon S3 (Simple Storage Service)
 
@@ -60,8 +63,6 @@ pre: " <b> 1.4. </b> "
 
 - Auto transition objects between storage classes.
 - Example: Standard → IA → Glacier.
-
----
 
 # Amazon S3 – Advanced Features
 
@@ -126,19 +127,15 @@ pre: " <b> 1.4. </b> "
 3. **Warm Standby** (low-capacity Active-Active).
 4. **Multi-Site** (full Active-Active).
 
----
-
 # AWS Backup
 
 - Centralized backup service for **EC2, EBS, RDS, FSx, EFS**.
 - Features: **scheduling, retention, monitoring**.
 - Important: retention config to control cost.
 
----
-
 # LABS
 
-## 🔹 Module 04 – Lab 13: S3 & Backup
+#### 🔹 Module 04 – Lab 13: S3 & Backup
 
 - Lab13-02.1: Create S3 Bucket
 - Lab13-02.2: Deploy Infrastructure
@@ -147,9 +144,7 @@ pre: " <b> 1.4. </b> "
 - Lab13-05: Test Restore
 - Lab13-06: Clean up Resources
 
----
-
-## 🔹 Module 04 – Lab 14: VM Import/Export
+#### 🔹 Module 04 – Lab 14: VM Import/Export
 
 - Lab14-01: VMware Workstation
 - Lab14-02.1: Export VM from On-premises
@@ -160,18 +155,14 @@ pre: " <b> 1.4. </b> "
 - Lab14-03.2: Export VM from Instance
 - Lab14-05: Resource Cleanup
 
----
-
-## 🔹 Module 04 – Lab 24: Storage Gateway
+#### 🔹 Module 04 – Lab 24: Storage Gateway
 
 - Lab24-2.1: Create Storage Gateway
 - Lab24-2.2: Create File Shares
 - Lab24-2.3: Mount File Shares on On-prem Server
 - Lab24-3: Clean up Resources
 
----
-
-## 🔹 Module 04 – Lab 25: FSx (Windows File System)
+#### 🔹 Module 04 – Lab 25: FSx (Windows File System)
 
 - Lab25-2.2: Create SSD Multi-AZ File System
 - Lab25-2.3: Create HDD Multi-AZ File System
@@ -186,9 +177,7 @@ pre: " <b> 1.4. </b> "
 - Lab25-12: Scale Storage Capacity
 - Lab25-13: Delete Environment
 
----
-
-## 🔹 Module 04 – Lab 57: S3 Website & CloudFront
+#### 🔹 Module 04 – Lab 57: S3 Website & CloudFront
 
 - Lab57-2.1: Create S3 Bucket
 - Lab57-2.2: Load Data

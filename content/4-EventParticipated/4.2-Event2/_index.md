@@ -5,122 +5,177 @@ weight: 1
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
-
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
-
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+# Summary Report: “DevOps on AWS”
 
 ### Event Objectives
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+* Introduce the fundamentals and benefits of  **Infrastructure as Code (IaC)** .
+* Provide an in-depth overview of **AWS CloudFormation** and  **AWS CDK** .
+* Offer foundational knowledge on  **Docker** , container images, and workflows.
+* Explore AWS container services:  **ECR, ECS, EKS, and App Runner** .
+* Present CI/CD implementation approaches and comparisons between DevOps tools.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+* **Bao Huynh** – AWS Community Builder
+* **Thinh Nguyen** – AWS Community Builder
+* **Vi Tran** – AWS Community Builder
 
 ### Key Highlights
 
-#### Identifying the drawbacks of legacy application architecture
-
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
-
 #### Transitioning to modern application architecture – Microservices
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+## 1. Infrastructure as Code (IaC)
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+* IaC eliminates ClickOps limitations such as slowness, inconsistency, and human errors (shown on  *slide 7* ).
+* Key benefits: automation, scalability, reproducibility, and improved team collaboration.
+* Helps maintain reliable infrastructure by avoiding manual configuration drift.
 
-#### Domain-Driven Design (DDD)
+## 2. AWS CloudFormation
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+* AWS’s native IaC tool using **YAML/JSON** templates.
+* Key concepts:
+  * **Stack** – a unit that groups and manages AWS resources.
+  * **Template Anatomy**:
+    * `AWSTemplateFormatVersion`
+    * `Description`
+    * `Parameters` – input values such as KeyPair
+    * `Mappings` – e.g., selecting AMI per region
+    * `Conditions`
+    * **Resources** – required section
+    * `Outputs` – values like public IP for cross-stack usage
+* Supports **Drift Detection** to identify manual changes outside CloudFormation.
 
-#### Event-Driven Architecture
+## 3. AWS CDK (Cloud Development Kit)
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+* An open-source IaC framework using programming languages (TypeScript, Python, Java, Go, C#, etc.).
+* Uses the **constructs** model:
 
-#### Compute Evolution
+  * **L1** – direct 1:1 CloudFormation mapping
+  * **L2** – higher-level, developer-friendly with best practices
+  * **L3** – complete architectural patterns
+* Important CDK CLI commands:
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+  `cdk init`,
+* `cdk bootstrap`,
+* `cdk synth`,
+* `cdk deploy`,
+* `cdk diff`,
+* `cdk destroy`,
+* `cdk drift`,
+* `cdk doctor`,
+* `cdk import`.
+* CDK synthesizes CloudFormation templates before deployment.
 
-#### Amazon Q Developer
+## 4. Docker & Container Fundamentals
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+* Docker standardizes application packaging across environments.
+* **Containers vs VMs** (slide 68): containers are lightweight, fast, and resource-efficient.
+* Docker pipeline:  **Dockerfile → Image → Container** ; images stored in registries like  **ECR** .
 
-### Key Takeaways
+## 5. Amazon ECR
 
-#### Design Mindset
+* AWS’s fully managed private container registry.
+* Key features:
+  * Image scanning
+  * Immutable tags
+  * Lifecycle policies
+  * Encryption & IAM control
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+## 6. Amazon ECS
 
-#### Technical Architecture
+* Fully managed container orchestration service from AWS.
+* Two launch types:
+  * **Fargate** – serverless, no infrastructure management
+  * **EC2** – more control and cost-optimized for long-running tasks
+* ECS core components:
+  * **Cluster**
+  * **Task Definition**
+  * **Task**
+  * **Service**
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+## 7. Amazon EKS
 
-#### Modernization Strategy
+* Fully managed **Kubernetes** service on AWS.
+* Automates control plane operations, scaling, and upgrades.
+* Can run workloads on EC2, Fargate, or Outposts.
+* **ECS vs EKS** (slide 89):
+  * **ECS** : simpler, deeply AWS integrated, less operational overhead
+  * **EKS** : Kubernetes standard, more flexibility, higher complexity
 
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
+## 8. AWS App Runner
 
-### Applying to Work
+* A quick and managed way to deploy web applications and APIs from GitHub or ECR.
+* Provides automatic build, scaling, security, and HTTPS endpoint.
+* Suitable for microservices, prototypes, and small-to-medium production workloads.
 
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+# Key Takeaways
 
-### Event Experience
+### IaC Mindset
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+* Reduce manual console operations; fully embrace IaC for consistency and automation.
+* IaC increases deployment reliability and minimizes configuration drift.
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
+### Technical Architecture
 
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
+* CloudFormation is ideal for precise resource definitions.
+* CDK enables reusable patterns, faster development, and code abstraction.
+* ECS is best for simplicity; EKS is best for teams requiring full Kubernetes capabilities.
 
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
+### DevOps & Containers
 
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
+* Standardize application packaging with Docker.
+* Use ECR + ECS/EKS workflows for secure, scalable deployment.
+* App Runner is great for fast deployments with minimal DevOps overhead.
 
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
+# Applying to Work
+
+* Adopt IaC across all projects using CloudFormation or CDK.
+* Implement a container pipeline (build → push → deploy).
+* Prevent drift by standardizing infrastructure repositories.
+* Use **ECS Fargate** for microservices; adopt **EKS** if Kubernetes expertise is required.
+* Test **App Runner** for lightweight services and rapid prototyping.
+
+# Event Experience
+
+* The workshop provided a clear transition path from manual operations to modern IaC practices.
+* CDK construct levels (L1 → L2 → L3) helped visualize infrastructure abstraction and best practices.
+* Live demos on CloudFormation and ECS made the deployment workflow easier to understand.
+* Discussions highlighted how IaC and containerization reduce operational burden and improve scalability.
 
 #### Some event photos
-*Add your event photos here*  
 
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+Dưới đây là  **phiên bản tóm gọn bằng tiếng Anh** , vẫn dựa đúng nội dung từ file PDF:
+
+---
+
+### Hands-on Technical Exposure (Summary)
+
+* Practiced defining infrastructure using  **CloudFormation templates** , including parameters, mappings, conditions, and outputs.
+* Used **AWS CDK CLI commands** to generate, synthesize, and deploy stacks, seeing how high-level code becomes CloudFormation templates.
+* Explored construct levels (L1–L3) through examples showing increasing abstraction and best practices.
+* Gained practical understanding of **ClickOps vs IaC** and how drift detection helps maintain infrastructure consistency.
+
+### Leveraging Modern Tools (Summary)
+
+* Learned how **AWS CDK** enables infrastructure provisioning through programming languages.
+* Explored how **Amplify** uses CloudFormation behind the scenes for backend deployments.
+* Reviewed Docker workflows and worked with  **ECR, ECS, EKS** , and **App Runner** for container deployments.
+* Understood how managed services automate scaling, security, and deployment pipelines.
+
+### Networking and Discussions (Summary)
+
+* Discussed real-world IaC adoption challenges with AWS Community Builders and peers.
+* Gained insights into choosing between **ECS and EKS** depending on operational needs and complexity.
+* Shared experiences on migrating from manual operations to automated DevOps practices.
+
+### Lessons Learned (Summary)
+
+* IaC increases  **automation, consistency, and reproducibility** , reducing human error.
+* CloudFormation provides precise control, while CDK boosts developer productivity with higher-level constructs.
+* Choosing the right container service (ECS, EKS, App Runner) impacts scalability and operational effort.
+* Effective DevOps combines IaC, CI/CD, containers, and automation to build resilient cloud architectures.
+
+### Event Photos
+
+*Add your photos here…*

@@ -5,53 +5,117 @@ weight: 1
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 8 Objectives:
 
 * Connect and get acquainted with members of First Cloud Journey.
 * Understand basic AWS services, how to use the console & CLI.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task                                              | Start Date | Completion Date | Reference Material                                                                                          |
+| --- | ------------------------------------------------- | ---------- | --------------- | ----------------------------------------------------------------------------------------------------------- |
+| 2   | Basic database concepts on AWS & managed services | 10/23/2025 | 10/23/2025      | [YouTube Video](https://www.youtube.com/watch?v=OOD2RwWuLRw&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=217) |
+| 3   | Primary Key, Foreign Key & Normalization          | 10/24/2025 | 10/24/2025      | cont                                                                                                        |
+| 4   | Indexing, Partitioning & Execution Plan           | 10/25/2025 | 10/25/2025      | cont                                                                                                        |
+| 5   | Database Logs, Buffer Cache & Transactions        | 10/26/2025 | 10/26/2025      | cont                                                                                                        |
+| 6   | RDBMS vs NoSQL, OLTP vs OLAP / Data Warehouse     | 10/27/2025 | 10/27/2025      | cont                                                                                                        |
 
 ### Week 8 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Understood what AWS is and mastered the basic service groups:#### Basic database concepts on AWS & managed services
+* AWS manages the database infrastructure.
+* You focus on data design & query optimization.
+* Databases handle multi-user access via sessions.
+* Must understand schema, keys, indexes, partitions, logs before using AWS DB services.
 
-* Successfully created and configured an AWS Free Tier account.
+#### Primary Key, Foreign Key & Normalization
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+**Primary Key (PK)**
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Uniquely identifies each record in a table.
+* Cannot be duplicated or null.
+* Ensures data integrity.
 
-* Used AWS CLI to perform basic operations such as:
+**Foreign Key (FK)**
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+* A column that references the Primary Key of another table.
+* Creates relationships between tables.
+* Ensures referential integrity.
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+**Normalization**
+
+* Organizes data to **avoid duplication** and  **reduce storage usage** .
+* Ensures consistency and improves data integrity.
+* Common forms: 1NF, 2NF, 3NF (increasing levels of structure).
+
+#### Indexing, Partitioning & Execution Plan
+
+**Indexing**
+
+* Speeds up data retrieval by avoiding full table scans.
+* Requires extra storage and increases write cost.
+* Useful for frequently queried columns.
+
+**Partitioning**
+
+* Splits large tables into smaller parts for faster queries.
+* Queries only scan relevant partitions instead of the whole table.
+* Improves performance and scalability.
+
+**Execution Plan**
+
+* The database's step-by-step strategy for running a query.
+* Shows whether indexes, scans, or joins are used.
+* Essential for query optimization.
+
+#### Database Logs, Buffer Cache & Transactions
+
+**Database Logs**
+
+* Record all changes made to the database.
+* Enable recovery after failures and support replication.
+* Ensure data can be restored to a consistent state.
+
+**Buffer Cache**
+
+* In-memory area that stores frequently accessed data blocks.
+* Reduces disk reads and improves query speed.
+* Holds data temporarily before writing to disk.
+
+**Transactions**
+
+* A set of operations that must be completed successfully as a unit.
+* Follow **ACID** principles to ensure reliability.
+* Only committed transactions are written permanently to the database.
+
+#### RDBMS vs NoSQL, OLTP vs OLAP / Data Warehouse
+
+**RDBMS vs NoSQL**
+
+**RDBMS (Relational Databases)**
+
+* Structured tables with fixed schema.
+* Strong consistency, supports complex queries (SQL).
+* Scales vertically (add more power to one server).
+* Best for transactional, structured data.
+
+**NoSQL**
+
+* Flexible or schema-less data model (document, key-value, wide-column, graph).
+* High scalability, often horizontal scaling.
+* Optimized for performance and large datasets.
+* Suitable for unstructured/semi-structured data.
+
+#### **OLTP vs OLAP / Data Warehouse**
+
+**OLTP (Online Transaction Processing)**
+
+* Handles real-time, frequent read/write operations.
+* Used for transactions like orders, payments, banking.
+* Requires high consistency and fast response.
+
+**OLAP (Online Analytical Processing) / Data Warehouse**
+
+* Stores large amounts of historical data for analysis.
+* Supports complex queries for reporting and business insights.
+* Optimized for read-heavy, analytical workloads, not frequent updates.

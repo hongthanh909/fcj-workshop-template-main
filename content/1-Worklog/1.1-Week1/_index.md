@@ -7,7 +7,6 @@ pre: " <b> 1.1. </b> "
 ---
 ---
 
-
 ### Week 1 Objectives:
 
 ---
@@ -18,11 +17,9 @@ pre: " <b> 1.1. </b> "
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | -------------------------------------------------------------------------------------------- |
 | 1   | - AWS infrastructure<br />- AWS Services<br />  - Create an AWS account <br /> - Create Budget <br /> - Account authentication support | 09/11/2025 | 09/11/2025      |                                                                                              |
 | 2   | - What is a VPC                                                                                                                           | 09/12/2025 | 09/12/2025      | [AWS VPC Module 02-01](https://glasp.co/reader?url=https://www.youtube.com/watch?v=O9Ac_vGHquM) |
-| 3   | - VPC Security & Multi-VPC features                                                                                                       | 09/13/2025 | 09/13/2025      |                                                                                              |
+| 3   | - VPC Security & Multi-VPC features                                                                                                       | 09/13/2025 | 09/13/2025      | cont                                                                                         |
 | 4   | - VPN                                                                                                                                     | 09/14/2025 | 09/15/2025      | [AWS VPN Basics](https://glasp.co/reader?url=https://www.youtube.com/watch?v=CXU8D3kyxIc)       |
-| 6   | - Weekly knowledge summary                                                                                                                | 09/15/2025 | 09/15/2025      |                                                                                              |
-
----
+| 6   | - Weekly knowledge summary                                                                                                                | 09/15/2025 | 09/15/2025      | cont                                                                                         |
 
 ## Achievements
 

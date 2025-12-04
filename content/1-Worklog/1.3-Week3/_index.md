@@ -5,7 +5,6 @@ weight: 1
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-
 ### Week 3 Objectives:
 
 * Connect and get acquainted with members of First Cloud Journey.
@@ -13,13 +12,13 @@ pre: " <b> 1.3. </b> "
 
 ### Tasks to be carried out this week:
 
-| Day | Task                                                                | Start Date | Completion Date | Reference Material                                                              |
-| --- | ------------------------------------------------------------------- | ---------- | --------------- | ------------------------------------------------------------------------------- |
-| 2   | Compute VM on AWS                                                   | 08/11/2025 | 08/11/2025      |                                                                                 |
-| 3   | EC2 Introduction                                                    | 08/12/2025 | 08/12/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 4   | EC2 (Lab)<br />- EC2 & Infrastructure<br />- Storage Gateway      | 08/13/2025 | 08/13/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 5   | Lab (cons)<br />-S3 & Static Website<br />-S3 Security & CloudFront | 08/14/2025 | 08/15/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 6   | Weekly knowledge summary                                            | 08/15/2025 | 08/15/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
+| Day | Task                                                                | Start Date | Completion Date | Reference Material |
+| --- | ------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
+| 2   | Compute VM on AWS                                                   | 09/25/2025 | 09/25/2025      |                    |
+| 3   | EC2 Introduction                                                    | 09/26/2025 | 09/26/2025      |                    |
+| 4   | EC2 (Lab)<br />- EC2 & Infrastructure<br />- Storage Gateway      | 09/27/2025 | 09/27/2025      |                    |
+| 5   | Lab (cons)<br />-S3 & Static Website<br />-S3 Security & CloudFront | 09/28/2025 | 09/28/2025      |                    |
+| 6   | Weekly knowledge summary                                            | 09/29/2025 | 09/29/2025      |                    |
 
 ### Week 3 Objectives:1.
 

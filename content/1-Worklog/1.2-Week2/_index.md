@@ -5,22 +5,24 @@ weight: 1
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-### Week 2 Objectives:
+### **Week 2 Objectives:**
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Understand and practice core **VPC networking components** (subnets, route tables, IGW, NAT, SG, NACLs).
+* Build hands-on experience with **Hybrid DNS & Amazon Route 53** for cross-network name resolution.
+* Learn how to establish **VPC Peering** connections and configure routing between VPCs.
+* Explore **AWS Transit Gateway** to connect multiple VPCs and manage centralized routing.
+* Complete end-to-end labs involving CloudFormation, EC2, DNS resolvers, and network connectivity testing.
+* Summarize weekly learning to reinforce key AWS networking concepts.
 
 ### Tasks to be carried out this week:
 
 | Day | Task                     | Start Date | Completion Date | Reference Material |
 | --- | ------------------------ | ---------- | --------------- | ------------------ |
-| 2   | VPC (cons)               |            |                 |                    |
-| 3   | Hydrid DNS & Route 53    |            |                 |                    |
-| 4   | VPC Peering              |            |                 |                    |
-| 5   | Transit Gateway          |            |                 |                    |
-| 6   | Weekly knowledge summary |            |                 |                    |
-
-
+| 2   | VPC (cont)               | 09/18/2025 | 09/18/2025      |                    |
+| 3   | Hydrid DNS & Route 53    | 09/19/2025 | 09/19/2025      |                    |
+| 4   | VPC Peering              | 09/20/2025 | 09/20/2025      |                    |
+| 5   | Transit Gateway          | 09/21/2025 | 09/21/2025      |                    |
+| 6   | Weekly knowledge summary | 09/22/2025 | 09/22/2025      |                    |
 
 ### 1. VPC (Lab)
 
