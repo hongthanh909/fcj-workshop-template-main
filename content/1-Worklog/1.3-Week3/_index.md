@@ -1,24 +1,25 @@
 ---
 title: "Week 3 Worklog"
-date: 2025-01-01
-weight: 1
+date: 2025-09-25
+weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
 ### Week 3 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Understand EC2 basics: instance types, AMI, snapshots, storage (EBS, Instance Store).
+* Practice hands-on labs with EC2, Storage Gateway, S3 static website, and CloudFront.
+* Learn Auto Scaling, EFS, FSx, and VM migration services.
 
 ### Tasks to be carried out this week:
 
-| Day | Task                                                                | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
-| 2   | Compute VM on AWS                                                   | 09/25/2025 | 09/25/2025      |                    |
-| 3   | EC2 Introduction                                                    | 09/26/2025 | 09/26/2025      |                    |
-| 4   | EC2 (Lab)<br />- EC2 & Infrastructure<br />- Storage Gateway      | 09/27/2025 | 09/27/2025      |                    |
-| 5   | Lab (cons)<br />-S3 & Static Website<br />-S3 Security & CloudFront | 09/28/2025 | 09/28/2025      |                    |
-| 6   | Weekly knowledge summary                                            | 09/29/2025 | 09/29/2025      |                    |
+| Day | Task                                                                | Start Date | Completion Date | Reference Material                                                                                     |
+| --- | ------------------------------------------------------------------- | ---------- | --------------- | ------------------------------------------------------------------------------------------------------ |
+| 2   | Compute VM on AWS                                                   | 09/25/2025 | 09/25/2025      | [VM on AWS](https://www.youtube.com/watch?v=-t5h4N6vfBs&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=72) |
+| 3   | EC2 Introduction                                                    | 09/26/2025 | 09/26/2025      | [EC2](https://www.youtube.com/watch?v=e7XeKdOVq40&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=73)       |
+| 4   | EC2 (Lab)<br />- EC2 & Infrastructure<br />- Storage Gateway      | 09/27/2025 | 09/27/2025      | cont                                                                                                   |
+| 5   | Lab (cons)<br />-S3 & Static Website<br />-S3 Security & CloudFront | 09/28/2025 | 09/28/2025      | [S3](https://www.youtube.com/watch?v=_yunukwcAwc&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=104)       |
+| 6   | Weekly knowledge summary                                            | 09/29/2025 | 09/29/2025      |                                                                                                        |
 
 ### Week 3 Objectives:1.
 

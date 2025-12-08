@@ -1,49 +1,47 @@
 ---
 title: "Week 10 Worklog"
-date: 2025-01-01
-weight: 2
+date: 2025-11-13
+weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
 ### Week 10 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Test backend Lambda functions and API endpoints.
+* Fix authentication, authorization, and DynamoDB data consistency bugs.
+* Verify comment deletion cascade and profile data mapping.
+
+# Worklog - Testing & Bug Fixing Phase Week 10
+
+## Week 10: Backend Testing & Bug Fixes
+
+### Week 10 Objectives:
+
+- Test backend Lambda functions và API endpoints
+- Fix bugs authentication và authorization
+- Verify DynamoDB operations và data consistency
 
 ### Tasks to be carried out this week:
 
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ---- | ---------- | --------------- | ------------------ |
-| 2   |      | 11/13/2025 | 11/13/2025      |                    |
-| 3   |      | 11/14/2025 | 11/14/2025      |                    |
-| 4   |      | 11/15/2025 | 11/15/2025      |                    |
-| 5   |      | 11/16/2025 | 11/16/2025      |                    |
-| 6   |      | 11/17/2025 | 11/17/2025      |                    |
+| Day | Task                                                        | Start Date | Completion Date | Reference Material     |
+| --- | ----------------------------------------------------------- | ---------- | --------------- | ---------------------- |
+| 2   | Test Auth Module - Login/Logout flow                        | 11/13/2025 | 11/13/2025      | services/auth-module   |
+| 3   | Test Ban Status API - Check user ban detection              | 11/14/2025 | 11/14/2025      | useBanStatus.ts        |
+| 4   | Fix TODO: Delete all replies when parent comment deleted    | 11/15/2025 | 11/15/2025      | comment.service.ts:434 |
+| 5   | Test Profile CRUD operations - snake_case/camelCase mapping | 11/16/2025 | 11/16/2025      | auth-module/index.ts   |
+| 6   | Test Privacy settings - Legacy boolean structure handling   | 11/17/2025 | 11/17/2025      | profile.service.ts:145 |
 
 ### Week 10 Achievements:
 
-* Understood what AWS is and mastered the basic service groups:
+- Tested authentication flow including banned user detection
+- Fixed comment deletion cascade issue (replies not deleted)
+- Verified profile data mapping between API and internal models
+- Tested privacy settings migration from legacy format
 
-  * Compute
-  * Storage
-  * Networking
-  * Database
-  * ...
-* Successfully created and configured an AWS Free Tier account.
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-* Installed and configured AWS CLI on the computer, including:
+### Bugs Found & Fixed:
 
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+| Bug ID  | Description                                             | Severity | Status |
+| ------- | ------------------------------------------------------- | -------- | ------ |
+| BUG-001 | Comment replies not deleted when parent comment deleted | High     | Fixed  |
+| BUG-002 | Legacy privacy boolean fields not properly converted    | Medium   | Fixed  |
+| BUG-003 | Ban status check timeout causing login delays           | Medium   | Fixed  |

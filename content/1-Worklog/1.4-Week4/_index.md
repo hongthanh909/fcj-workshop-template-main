@@ -1,7 +1,7 @@
 ---
 title: "Week 4 Worklog"
-date: 2025-01-01
-weight: 1
+date: 2025-10-02
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
@@ -16,13 +16,13 @@ pre: " <b> 1.4. </b> "
 * Learn DR strategies and use AWS Backup for automated backups.
 * Practice through labs: S3, VM Import/Export, Storage Gateway, FSx, and S3 + CloudFront.
 
-| Day | Task                                                                                                                          | Start Date | Completion Date | Reference Material |
-| --- | ----------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
-| 2   | Amazon S3 (Simple Storage Service)                                                                                            | 10/02/2025 | 10/02/2025      |                    |
-| 3   | Amazon S3 – Advanced Features                                                                                                | 10/03/2025 | 10/03/2025      |                    |
-| 4   | AWS Snow Family<br />AWS Storage Gateway<br />Disaster Recovery on AWS<br />AWS Backup                                        | 10/04/2025 | 10/04/2025      |                    |
-| 5   | Lab<br />(S3 & Backup)<br />VM Import/Export<br />Storage Gateway<br />FSx (Windows File System)<br />S3 Website & CloudFront | 10/05/2025 | 10/05/2025      |                    |
-| 6   | Weekly Knowledge Summary                                                                                                      | 10/06/2025 | 10/06/2025      |                    |
+| Day | Task                                                                                                                          | Start Date | Completion Date | Reference Material                                                                                                                   |
+| --- | ----------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 2   | Amazon S3 (Simple Storage Service)                                                                                            | 10/02/2025 | 10/02/2025      | [cont](https://www.youtube.com/watch?v=_yunukwcAwc&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=104)                                   |
+| 3   | Amazon S3 – Advanced Features                                                                                                | 10/03/2025 | 10/03/2025      | [cont](https://www.youtube.com/watch?v=_yunukwcAwc&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=104)                                   |
+| 4   | AWS Snow Family<br />AWS Storage Gateway<br />Disaster Recovery on AWS<br />AWS Backup                                        | 10/04/2025 | 10/04/2025      | [Snow Family - Storage Gateway - Backup](https://www.youtube.com/watch?v=YXn8Q_Hpsu4&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=106) |
+| 5   | Lab<br />(S3 & Backup)<br />VM Import/Export<br />Storage Gateway<br />FSx (Windows File System)<br />S3 Website & CloudFront | 10/05/2025 | 10/05/2025      | [cont](https://www.youtube.com/watch?v=YXn8Q_Hpsu4&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=106)                                   |
+| 6   | Weekly Knowledge Summary                                                                                                      | 10/06/2025 | 10/06/2025      |                                                                                                                                      |
 
 ### Week 4 Achievements:
 
@@ -104,16 +104,12 @@ pre: " <b> 1.4. </b> "
 - **Snowmobile**: truck for PB–EB scale data.
 - Use case: very large data, slow Internet, no Direct Connect.
 
----
-
 # AWS Storage Gateway
 
 - Hybrid storage: on-prem + AWS.
 - **File Gateway**: NFS/SMB → S3 objects.
 - **Volume Gateway**: block storage (Stored Volumes for DR, Cached Volumes for cost).
 - **Tape Gateway**: virtual tape library → S3/Glacier.
-
----
 
 # Disaster Recovery (DR) on AWS
 

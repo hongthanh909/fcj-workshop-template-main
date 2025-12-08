@@ -1,6 +1,6 @@
 ---
 title: "Week 1 Worklog"
-date: 2025-01-01
+date: 2025-09-11
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
@@ -9,7 +9,9 @@ pre: " <b> 1.1. </b> "
 
 ### Week 1 Objectives:
 
----
+* Set up AWS account with MFA, IAM users, and budget management.
+* Understand AWS infrastructure (Regions, AZs, Edge Locations) and VPC fundamentals.
+* Learn VPC security (Security Groups, NACLs, Flow Logs) and VPN/Direct Connect connectivity.
 
 ## Tasks for the Week
 

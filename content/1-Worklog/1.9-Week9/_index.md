@@ -1,24 +1,23 @@
 ---
 title: "Week 9 Worklog"
-date: 2025-01-01
-weight: 1
+date: 2025-11-06
+weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
 ### Week 9 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+Build AWS networking (VPC, EC2, RDS) and perform database migrations with DMS/SCT.
+Create data pipelines (S3 → Glue → Athena → QuickSight) and ETL processing with DynamoDB, DataBrew, EMR.
+Build Redshift data warehouse and interactive BI dashboards.Tasks to be carried out this week:
 
-### Tasks to be carried out this week:
-
-| Day | Task                                                                 | Start Date | Completion Date | Reference Material |
-| --- | -------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
-| 2   | VPC, EC2, RDS Networking + EC2 Fleet Manager                         | 11/06/2025 | 11/06/2025      |                    |
-| 3   | Database Migration (DMS/SCT) + Migration Troubleshooting             | 11/07/2025 | 11/07/2025      |                    |
-| 4   | S3 Data Pipeline: S3 → Glue → Athena → QuickSight                 | 11/08/2025 | 11/08/2025      |                    |
-| 5   | DynamoDB + Cloud9, DataBrew & EMR ETL Processing                     | 11/09/2025 | 11/09/2025      |                    |
-| 6   | Redshift Data Warehouse + Dashboards (ETL, Analytics, Visualization) | 11/10/2025 | 11/10/2025      |                    |
+| Day | Task                                                                 | Start Date | Completion Date | Reference Material                                                                    |
+| --- | -------------------------------------------------------------------- | ---------- | --------------- | ------------------------------------------------------------------------------------- |
+| 2   | VPC, EC2, RDS Networking + EC2 Fleet Manager                         | 11/06/2025 | 11/06/2025      | [Summary link](https://www.youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i) |
+| 3   | Database Migration (DMS/SCT) + Migration Troubleshooting             | 11/07/2025 | 11/07/2025      | [Summary link](https://www.youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i) |
+| 4   | S3 Data Pipeline: S3 → Glue → Athena → QuickSight                 | 11/08/2025 | 11/08/2025      | [Summary link](https://www.youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i) |
+| 5   | DynamoDB + Cloud9, DataBrew & EMR ETL Processing                     | 11/09/2025 | 11/09/2025      | [Summary link](https://www.youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i) |
+| 6   | Redshift Data Warehouse + Dashboards (ETL, Analytics, Visualization) | 11/10/2025 | 11/10/2025      | [Summary link](https://www.youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i) |
 
 ### **Week 9 Achievements**
 

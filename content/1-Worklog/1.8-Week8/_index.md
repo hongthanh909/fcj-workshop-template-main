@@ -1,14 +1,15 @@
 ---
 title: "Week 8 Worklog"
-date: 2025-01-01
-weight: 1
+date: 2025-10-23
+weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
 ### Week 8 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Understand database fundamentals: Primary Key, Foreign Key, and Normalization.
+* Learn Indexing, Partitioning, and Execution Plans for query optimization.
+* Compare RDBMS vs NoSQL, and OLTP vs OLAP/Data Warehouse concepts.
 
 ### Tasks to be carried out this week:
 
@@ -22,7 +23,7 @@ pre: " <b> 1.8. </b> "
 
 ### Week 8 Achievements:
 
-* Understood what AWS is and mastered the basic service groups:#### Basic database concepts on AWS & managed services
+#### Basic database concepts on AWS & managed services
 * AWS manages the database infrastructure.
 * You focus on data design & query optimization.
 * Databases handle multi-user access via sessions.

@@ -1,53 +1,40 @@
 ---
 title: "Week 11 Worklog"
-date: 2025-01-01
-weight: 2
+date: 2025-11-20
+weight: 11
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
+## Week 11: Frontend Testing & Integration
 
 ### Week 11 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Test frontend components and user flows (comments, friends, posts).
+* Fix UI/UX bugs and verify API integration with error handling.
+* Test session management, token refresh, and protected route redirects.
 
 ### Tasks to be carried out this week:
 
-| Day | Task                                                                                                                                                                                                                             | Start Date | Completion Date | Reference Material |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
-| 2   | - Get acquainted with FCJ members `<br>` - Read and take note of internship unit rules and regulations                                                                                                                         | 11/20/2025 | 11/20/2025      |                    |
-| 3   | - Learn about AWS and its types of services `<br>`&emsp; + Compute `<br>`&emsp; + Storage `<br>`&emsp; + Networking `<br>`&emsp; + Database `<br>`&emsp; + ... `<br>`                                                | 11/21/2025 | 11/21/2025      |                    |
-| 4   | - Create AWS Free Tier account `<br>` - Learn about AWS Console & AWS CLI `<br>` - **Practice:** `<br>`&emsp; + Create AWS account `<br>`&emsp; + Install & configure AWS CLI `<br>` &emsp; + How to use AWS CLI | 11/22/2025 | 11/22/2025      |                    |
-| 5   | - Learn basic EC2:`<br>`&emsp; + Instance types `<br>`&emsp; + AMI `<br>`&emsp; + EBS `<br>`&emsp; + ... `<br>` - SSH connection methods to EC2 `<br>` - Learn about Elastic IP   `<br>`                           | 11/23/2025 | 11/23/2025      |                    |
-| 6   | -**Practice:** `<br>`&emsp; + Launch an EC2 instance `<br>`&emsp; + Connect via SSH `<br>`&emsp; + Attach an EBS volume                                                                                              | 11/24/2025 | 11/24/2025      |                    |
+| Day | Task                                                   | Start Date | Completion Date | Reference Material            |
+| --- | ------------------------------------------------------ | ---------- | --------------- | ----------------------------- |
+| 2   | Test Comments Service - TODO functions not implemented | 11/20/2025 | 11/20/2025      | frontend/services/comments.ts |
+| 3   | Test Friend Request flow - Cancel/Accept/Reject        | 11/21/2025 | 11/21/2025      | frontend/services/friends.ts  |
+| 4   | Test Post reactions - Like/Unlike toggle               | 11/22/2025 | 11/22/2025      | frontend/services/posts.ts    |
+| 5   | Test Session expired handling - Token refresh          | 11/23/2025 | 11/23/2025      | AuthContext.tsx               |
+| 6   | Test Protected Routes - Redirect logic                 | 11/24/2025 | 11/24/2025      | ProtectedRoute.tsx            |
 
 ### Week 11 Achievements:
 
-* Understood what AWS is and mastered the basic service groups:
+- Implemented missing comment service functions (getComments, createComment, etc.)
+- Fixed friend request state management issues
+- Verified token refresh mechanism works correctly
+- Tested protected route redirects for unauthenticated users
 
-  * Compute
-  * Storage
-  * Networking
-  * Database
-  * ...
-* Successfully created and configured an AWS Free Tier account.
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-* Installed and configured AWS CLI on the computer, including:
+### Bugs Found & Fixed:
 
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+| Bug ID  | Description                                                    | Severity | Status |
+| ------- | -------------------------------------------------------------- | -------- | ------ |
+| BUG-004 | Comments service functions return empty - TODO not implemented | High     | Fixed  |
+| BUG-005 | Friend request cancel not updating UI state                    | Medium   | Fixed  |
+| BUG-006 | Token refresh interval causing memory leak                     | Medium   | Fixed  |
+| BUG-007 | Avatar cache not cleared on logout                             | Low      | Fixed  |

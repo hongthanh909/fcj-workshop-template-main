@@ -1,14 +1,15 @@
 ---
 title: "Week 6 Worklog"
-date: 2025-01-01
-weight: 1
+date: 2025-10-16
+weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
 ## Week 6 Objectives
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Master IAM, AWS Organizations, and Service Control Policies (SCPs).
+* Learn encryption with KMS, ACM, and Secrets Manager.
+* Understand S3 security, VPC networking, CloudFront, and DR strategies.
 
 ## Tasks for the Week
 

@@ -1,14 +1,15 @@
 ---
 title: "Week 7 Worklog"
-date: 2025-01-01
-weight: 1
+date: 2025-10-16
+weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
 ### Week 7 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Complete hands-on labs with VPC, EC2, Lambda, and Slack automation.
+* Practice IAM user/policy/role management and tag-based access control.
+* Learn KMS encryption, CloudTrail logging, and Athena log analysis.
 
 ### Tasks to be carried out this week:
 
