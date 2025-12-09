@@ -8,7 +8,7 @@ pre: " <b> 5.09. </b> "
 
 #### Overview
 
-Sau khi test thành công, bạn sẽ push code lên GitLab để version control và chuẩn bị cho CI/CD.
+After successful testing, you will push code to GitLab for version control and prepare for CI/CD.
 
 #### Step 1: Initialize Git Repository
 

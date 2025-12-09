@@ -6,13 +6,13 @@ chapter: false
 pre: " <b> 5.08. </b> "
 ---
 
-#### Tổng quan
+#### Overview
 
-Sau khi deploy backend thành công, bạn cần test tất cả API endpoints để đảm bảo hệ thống hoạt động đúng từ đầu đến cuối. Workshop này hướng dẫn chi tiết cách test từng module của hệ thống EveryoneCook.
+After successfully deploying the backend, you need to test all API endpoints to ensure the system works correctly end-to-end. This workshop provides detailed instructions on how to test each module of the EveryoneCook system.
 
-#### Kiến trúc API
+#### API Architecture
 
-Dự án EveryoneCook sử dụng **API Router Pattern** với các thành phần:
+The EveryoneCook project uses the **API Router Pattern** with the following components:
 
 - **API Gateway**: REST API với custom domain `api-dev.everyonecook.cloud`
 - **API Router Lambda**: Routing requests tới các module Lambda
@@ -23,12 +23,12 @@ Dự án EveryoneCook sử dụng **API Router Pattern** với các thành phầ
   - `admin-lambda`: Admin Dashboard & Content Moderation
   - `upload-lambda`: File Upload với S3 Presigned URLs
 - **4 SQS Queues**: Async processing (AI, Image, Analytics, Notifications)
-- **WAF**: Web Application Firewall bảo vệ API
+- **WAF**: Web Application Firewall protecting API
 
-#### Luồng Test
+#### Test Flow
 
 ```
-1. Lấy API Endpoint
+1. Get API Endpoint
 2. Test Health Check (Public)
 3. Test User Registration & Verification
 4. Test User Login & Get JWT Token
@@ -37,17 +37,17 @@ Dự án EveryoneCook sử dụng **API Router Pattern** với các thành phầ
 7. Test Recipe Management
 8. Test AI Features (Recipe Generation, Translation)
 9. Test File Upload (S3 + CloudFront)
-10. Test Admin Features (nếu có quyền admin)
+10. Test Admin Features (if you have admin role)
 ```
 
 ---
 
-### Bước 1: Lấy API Endpoint
+### Step 1: Get API Endpoint
 
-**1. Lấy API URL từ CloudFormation Outputs**
+**1. Get API URL from CloudFormation Outputs**
 
 ```powershell
-# Get API endpoint từ Backend Stack
+# Get API endpoint from Backend Stack
 $API_ENDPOINT = aws cloudformation describe-stacks `
   --stack-name EveryoneCook-dev-Backend `
   --query 'Stacks[0].Outputs[?OutputKey==`ApiCustomDomain`].OutputValue' `
@@ -57,20 +57,20 @@ Write-Host "API Endpoint: $API_ENDPOINT"
 # Output: https://api-dev.everyonecook.cloud
 ```
 
-**2. Hoặc lấy từ file outputs.json**
+**2. Or get from outputs.json file**
 
 ```powershell
-# Đọc từ infrastructure/outputs.json
+# Read from infrastructure/outputs.json
 cd D:\Project_AWS\everyonecook\infrastructure
 $outputs = Get-Content outputs.json | ConvertFrom-Json
 $API_ENDPOINT = $outputs.'EveryoneCook-dev-Backend'.ApiCustomDomain
 Write-Host "API Endpoint: $API_ENDPOINT"
 ```
 
-**3. Setup biến môi trường**
+**3. Setup environment variables**
 
 ```powershell
-# Set API endpoint cho PowerShell session
+# Set API endpoint for PowerShell session
 $API_ENDPOINT = "https://api-dev.everyonecook.cloud"
 $HEADERS_JSON = @{"Content-Type"="application/json"}
 
@@ -80,11 +80,11 @@ Write-Host "  API Endpoint: $API_ENDPOINT"
 
 ---
 
-### Bước 2: Test Health Check (Public)
+### Step 2: Test Health Check (Public)
 
-Health check endpoint không cần authentication.
+Health check endpoint does not require authentication.
 
-**1. Test với PowerShell**
+**1. Test with PowerShell**
 
 ```powershell
 # Test health endpoint
@@ -100,13 +100,13 @@ $response | ConvertTo-Json
 # }
 ```
 
-**2. Test với curl (nếu có WSL hoặc Git Bash)**
+**2. Test with curl (if you have WSL or Git Bash)**
 
 ```bash
 curl -X GET "$API_ENDPOINT/health" | jq
 ```
 
-**3. Verify API Router hoạt động**
+**3. Verify API Router is working**
 
 ```powershell
 # Check API Router Lambda logs
@@ -117,9 +117,9 @@ aws logs tail /aws/lambda/everyonecook-dev-api-router --follow
 
 ---
 
-### Bước 3: Test User Registration
+### Step 3: Test User Registration
 
-**1. Lấy User Pool Client ID**
+**1. Get User Pool Client ID**
 
 ```powershell
 # Get Cognito User Pool Client ID
@@ -131,10 +131,10 @@ $CLIENT_ID = aws cloudformation describe-stacks `
 Write-Host "User Pool Client ID: $CLIENT_ID"
 ```
 
-**2. Register User mới**
+**2. Register new User**
 
 ```powershell
-# Đăng ký user với Cognito (không qua API - trực tiếp với Cognito)
+# Register user with Cognito (not through API - directly with Cognito)
 $username = "testuser_$(Get-Random -Maximum 9999)"
 $email = "test_$username@example.com"
 $password = "TestPassword123!"
@@ -160,19 +160,19 @@ aws logs tail /aws/lambda/EveryoneCook-dev-PreSignup --since 5m
 ```
 
 ✅ **Expected**: 
-- Cognito trả về success message
-- Pre-Signup trigger logs không có error
+- Cognito returns success message
+- Pre-Signup trigger logs have no errors
 
 ---
 
-### Bước 4: Verify Email & Confirm User
+### Step 4: Verify Email & Confirm User
 
-**1. Lấy Confirmation Code**
+**1. Get Confirmation Code**
 
 ```powershell
-# Trong môi trường dev, có thể lấy code từ email hoặc dùng admin command
-# Cách 1: Check email (nếu dùng real email)
-# Cách 2: Admin confirm (cho testing)
+# In dev environment, you can get code from email or use admin command
+# Option 1: Check email (if using real email)
+# Option 2: Admin confirm (for testing)
 
 aws cognito-idp admin-confirm-sign-up `
   --user-pool-id ap-southeast-1_PKoL34PF0 `
@@ -183,10 +183,10 @@ Write-Host "User confirmed: $username"
 
 **2. Verify Post-Confirmation Trigger**
 
-Post-Confirmation trigger sẽ tự động tạo user profile trong DynamoDB.
+Post-Confirmation trigger will automatically create user profile in DynamoDB.
 
 ```powershell
-# Check DynamoDB - User profile được tạo tự động
+# Check DynamoDB - User profile is created automatically
 aws dynamodb get-item `
   --table-name EveryoneCook-dev `
   --key "{\"PK\":{\"S\":\"USER#$username\"},\"SK\":{\"S\":\"PROFILE\"}}"
@@ -205,16 +205,16 @@ aws dynamodb get-item `
 aws logs tail /aws/lambda/EveryoneCook-dev-PostConfirmation --since 5m
 ```
 
-✅ **Expected**: User profile được tạo trong DynamoDB table
+✅ **Expected**: User profile is created in DynamoDB table
 
 ---
 
-### Bước 5: Test User Login & Get JWT Token
+### Step 5: Test User Login & Get JWT Token
 
-**1. Login để lấy JWT tokens**
+**1. Login to get JWT tokens**
 
 ```powershell
-# Sign in với Cognito
+# Sign in with Cognito
 $authResult = aws cognito-idp initiate-auth `
   --client-id $CLIENT_ID `
   --auth-flow USER_PASSWORD_AUTH `
@@ -232,7 +232,7 @@ Write-Host "ID Token length: $($ID_TOKEN.Length)"
 
 **2. Verify Post-Authentication Trigger**
 
-Post-Authentication trigger update `lastLoginAt` trong DynamoDB.
+Post-Authentication trigger updates `lastLoginAt` in DynamoDB.
 
 ```powershell
 # Check lastLoginAt updated
@@ -252,11 +252,11 @@ $HEADERS_AUTH = @{
 }
 ```
 
-✅ **Expected**: Login thành công, nhận được JWT tokens
+✅ **Expected**: Login successful, received JWT tokens
 
 ---
 
-### Bước 6: Test Profile Management
+### Step 6: Test Profile Management
 
 **Endpoint**: `/users/me`, `/users/profile`
 
@@ -335,11 +335,11 @@ Invoke-RestMethod `
   -Body $privacyUpdate
 ```
 
-✅ **Expected**: Profile được update thành công trong DynamoDB
+✅ **Expected**: Profile is updated successfully in DynamoDB
 
 ---
 
-### Bước 7: Test Social Features - Posts
+### Step 7: Test Social Features - Posts
 
 **Endpoints**: `/posts`, `/posts/{postId}`
 
@@ -431,11 +431,11 @@ $comments = Invoke-RestMethod `
 $comments | ConvertTo-Json -Depth 3
 ```
 
-✅ **Expected**: Posts, likes, comments được lưu trong DynamoDB
+✅ **Expected**: Posts, likes, comments are saved in DynamoDB
 
 ---
 
-### Bước 8: Test Social Features - Friends
+### Step 8: Test Social Features - Friends
 
 **Endpoints**: `/friends/*`
 
@@ -451,11 +451,11 @@ $users = Invoke-RestMethod `
 $users | ConvertTo-Json
 ```
 
-**2. Send Friend Request** (cần 2 users)
+**2. Send Friend Request** (requires 2 users)
 
 ```powershell
 # POST /friends/{userId}/request
-# Giả sử có USER_ID của user khác
+# Assuming you have USER_ID of another user
 $TARGET_USER_ID = "another-user-id"
 
 Invoke-RestMethod `
@@ -478,11 +478,11 @@ $requests = Invoke-RestMethod `
 $requests | ConvertTo-Json
 ```
 
-✅ **Expected**: Friend requests được tạo với status "pending"
+✅ **Expected**: Friend requests are created with status "pending"
 
 ---
 
-### Bước 9: Test Recipe Management
+### Step 9: Test Recipe Management
 
 **Endpoints**: `/recipes`, `/recipes/{recipeId}`
 
@@ -562,11 +562,11 @@ $searchResults = Invoke-RestMethod `
 $searchResults | ConvertTo-Json -Depth 3
 ```
 
-✅ **Expected**: Recipes được lưu trong DynamoDB với proper structure
+✅ **Expected**: Recipes are saved in DynamoDB with proper structure
 
 ---
 
-### Bước 10: Test AI Features (Bedrock)
+### Step 10: Test AI Features (Bedrock)
 
 **Endpoints**: `/recipes/generate-ai`, `/ai/nutrition`, `/dictionary/{ingredient}`
 
@@ -582,7 +582,7 @@ $aiRequest = @{
   difficulty = "medium"
 } | ConvertTo-Json
 
-Write-Host "Generating recipe with AI... (this takes 5-10 seconds)"
+Write-Host "Generating recipe with AI... (takes 5-10 seconds)"
 $aiRecipe = Invoke-RestMethod `
   -Uri "$API_ENDPOINT/recipes/generate-ai" `
   -Method Post `
@@ -629,13 +629,13 @@ Write-Host "Translation: $($translation.vietnamese)"
 ```
 
 ✅ **Expected**: 
-- AI recipe generation mất 5-10 giây
-- Response có Vietnamese ingredient names
-- Bedrock Lambda được invoke
+- AI recipe generation takes 5-10 seconds
+- Response has Vietnamese ingredient names
+- Bedrock Lambda is invoked
 
 ---
 
-### Bước 11: Test File Upload (S3 + CloudFront)
+### Step 11: Test File Upload (S3 + CloudFront)
 
 **Endpoint**: `/upload/presigned-url`
 
@@ -668,7 +668,7 @@ Write-Host "Upload Key: $UPLOAD_KEY"
 ```powershell
 # Create test image file
 $testImage = "D:\test-avatar.jpg"
-# (Tạo file test image hoặc dùng file có sẵn)
+# (Create test image file or use existing file)
 
 # Upload file using presigned URL
 Invoke-RestMethod `
@@ -684,7 +684,7 @@ Write-Host "File uploaded to S3 successfully"
 
 ```powershell
 # Get CloudFront distribution domain
-$CDN_DOMAIN = "d2shrpzup69rju.cloudfront.net"  # Từ outputs.json
+$CDN_DOMAIN = "d2shrpzup69rju.cloudfront.net"  # From outputs.json
 
 # Access file via CloudFront
 $fileUrl = "https://$CDN_DOMAIN/$UPLOAD_KEY"
@@ -695,11 +695,11 @@ Invoke-WebRequest -Uri $fileUrl -Method Head
 # Second request: X-Cache: Hit from cloudfront
 ```
 
-✅ **Expected**: File được upload lên S3 và serve qua CloudFront
+✅ **Expected**: File is uploaded to S3 and served via CloudFront
 
 ---
 
-### Bước 12: Test Admin Features (Requires Admin Role)
+### Step 12: Test Admin Features (Requires Admin Role)
 
 **Endpoints**: `/admin/*`
 
@@ -714,7 +714,7 @@ $stats = Invoke-RestMethod `
 
 $stats | ConvertTo-Json
 
-# Expected (nếu có admin role):
+# Expected (if you have admin role):
 # {
 #   "totalUsers": 123,
 #   "totalPosts": 456,
@@ -747,11 +747,11 @@ $reportedPosts = Invoke-RestMethod `
 $reportedPosts | ConvertTo-Json
 ```
 
-⚠️ **Note**: Admin endpoints require user có group "Admins" trong Cognito User Pool
+⚠️ **Note**: Admin endpoints require user to have "Admins" group in Cognito User Pool
 
 ---
 
-### Bước 13: Verify Async Processing (SQS Queues)
+### Step 13: Verify Async Processing (SQS Queues)
 
 **1. Check SQS Queues**
 
@@ -777,13 +777,13 @@ aws logs tail /aws/lambda/everyonecook-dev-image-worker --follow
 aws logs tail /aws/lambda/everyonecook-dev-ai-worker --follow
 ```
 
-✅ **Expected**: Messages được process bởi worker Lambdas
+✅ **Expected**: Messages are processed by worker Lambdas
 
 ---
 
 ### Testing Checklist
 
-Sử dụng checklist này để track progress:
+Use this checklist to track progress:
 
 #### Public Endpoints
 - [ ] `GET /health` - Health check responds
@@ -862,7 +862,7 @@ Sử dụng checklist này để track progress:
 #### 1. 401 Unauthorized
 
 ```powershell
-# Verify JWT token not expired
+# Verify JWT token is not expired
 $ID_TOKEN = "your-token-here"
 $parts = $ID_TOKEN.Split('.')
 $payload = [System.Text.Encoding]::UTF8.GetString(
@@ -914,14 +914,14 @@ aws sqs get-queue-attributes `
 
 ### Next Steps
 
-Sau khi test thành công tất cả endpoints:
+After successfully testing all endpoints:
 
-1. ✅ **Verify Infrastructure**: Tất cả AWS resources hoạt động đúng
-2. 📊 **Monitor CloudWatch**: Check metrics và logs
-3. 🔒 **Security Review**: Verify WAF rules và Cognito auth
-4. 📝 **Document API**: Update API documentation nếu cần
+1. ✅ **Verify Infrastructure**: All AWS resources are working correctly
+2. 📊 **Monitor CloudWatch**: Check metrics and logs
+3. 🔒 **Security Review**: Verify WAF rules and Cognito auth
+4. 📝 **Document API**: Update API documentation if needed
 5. 🚀 **Deploy Frontend**: Proceed to frontend deployment
-6. 📦 **Version Control**: Commit code và push to GitLab (next step)
+6. 📦 **Version Control**: Commit code and push to GitLab (next step)
 
 Proceed to: [5.09 - Push to GitLab](../5.09-push-gitlab/)
 

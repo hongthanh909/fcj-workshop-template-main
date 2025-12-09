@@ -5,10 +5,9 @@ weight: 2
 chapter: false
 pre: " <b> 5.02. </b> "
 ---
-
 #### Overview
 
-Trong bước này, bạn sẽ cài đặt tất cả các công cụ cần thiết để phát triển và deploy ứng dụng EveryoneCook.
+In this step, you will install all the necessary tools to develop and deploy the EveryoneCook application.
 
 #### Required Tools
 
@@ -67,11 +66,13 @@ cdk --version
 # Verify installation
 git --version
 ```
+
 ![Git Installation](/images/5-Workshop/5.2-setup-environment/git-version.png)
 
 **5. Code Editor**
 
 Recommended: Visual Studio Code with extensions:
+
 - AWS Toolkit
 - GitLab Workflow
 - ESLint
@@ -82,6 +83,7 @@ Recommended: Visual Studio Code with extensions:
 **1. Create AWS Account**
 
 If you don't have an AWS account:
+
 1. Go to https://aws.amazon.com/
 2. Click "Create an AWS Account"
 3. Follow the registration process
@@ -121,6 +123,7 @@ aws sts get-caller-identity
 
 # Should return your account ID and user ARN
 ```
+
 ![AWS Access Verified](/images/5-Workshop/5.2-setup-environment/aws-sts-identity.png)
 
 #### Domain Setup (Optional)
@@ -130,7 +133,7 @@ If you want to use a custom domain:
 **1. Register Domain**
 
 Buy domain name on hpanel.hostinger
-Route 53 creates dns record to hostinger 
+Route 53 creates dns record to hostinger
 For this workshop, we use: `everyonecook.cloud`
 
 ![AWS DNS](/images/5-Workshop/5.2-setup-environment/hostinger.png)
@@ -163,12 +166,14 @@ git config --list
 **1. Clone or Create Project**
 
 Option A: Clone existing project
+
 ```bash
 git clone https://gitlab.com/your-username/everyonecook.git
 cd everyonecook
 ```
 
 Option B: Create new project
+
 ```bash
 mkdir everyonecook
 cd everyonecook
@@ -231,6 +236,7 @@ npm list --depth=0
 #### Troubleshooting
 
 **Issue: Node.js version mismatch**
+
 ```bash
 # Use nvm to switch versions
 nvm install 20
@@ -238,10 +244,12 @@ nvm use 20
 ```
 
 **Issue: AWS CLI not found**
+
 - Restart terminal after installation
 - Check PATH environment variable
 
 **Issue: CDK command not found**
+
 ```bash
 # Reinstall CDK globally
 npm uninstall -g aws-cdk
@@ -249,11 +257,31 @@ npm install -g aws-cdk
 ```
 
 **Issue: AWS credentials invalid**
+
 ```bash
 # Reconfigure AWS CLI
 aws configure
 # Enter correct credentials
 ```
+
+#### Cost Estimate
+
+**Development Environment:**
+
+* AWS Free Tier covers most services
+* Estimated cost: $20-55/month
+* Main costs: DynamoDB, S3, CloudFront, Lambda
+
+**Tips to minimize costs:**
+
+* Use pay-per-request for DynamoDB
+* Enable S3 Intelligent-Tiering
+* Disable OpenSearch in dev (enable only when needed)
+* Delete resources when not in use
+
+#### Next Steps
+
+Once your environment is set up, proceed to [CDK Bootstrap](https://hviethub.github.io/Internship-Report/5-workshop/5.3-cdk-bootstrap/) to prepare your AWS account for CDK deployments.
 
 #### Next Steps
 

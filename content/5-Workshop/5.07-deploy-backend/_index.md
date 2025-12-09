@@ -6,11 +6,11 @@ chapter: false
 pre: " <b> 5.07. </b> "
 ---
 
-#### Tổng quan
+#### Overview
 
-Sau khi deploy infrastructure với CDK, bạn cần deploy Lambda code lên AWS. Dự án EveryoneCook cung cấp automated deployment script để build, package và deploy tất cả Lambda functions.
+After deploying infrastructure with CDK, you need to deploy Lambda code to AWS. The EveryoneCook project provides an automated deployment script to build, package, and deploy all Lambda functions.
 
-#### Kiến trúc Backend
+#### Backend Architecture
 
 **Lambda Modules (7 functions):**
 - `api-router` - API Gateway routing với JWT validation
@@ -43,26 +43,26 @@ Sau khi deploy infrastructure với CDK, bạn cần deploy Lambda code lên AWS
 
 ### Option A: Full Deployment (Recommended - First Time)
 
-Full deployment sử dụng CDK để deploy toàn bộ infrastructure và Lambda code.
+Full deployment uses CDK to deploy the entire infrastructure and Lambda code.
 
-#### Bước 1: Navigate to Project
+#### Step 1: Navigate to Project
 
 ```powershell
 # Navigate to everyonecook root
 cd D:\Project_AWS\everyonecook
 ```
 
-#### Bước 2: Run Full Deployment Script
+#### Step 2: Run Full Deployment Script
 
 ```powershell
-# Full deployment cho dev environment
+# Full deployment for dev environment
 .\deploy\deploy-backend.ps1 -Environment dev
 
-# Hoặc ngắn gọn (default là dev)
+# Or short form (default is dev)
 .\deploy\deploy-backend.ps1
 ```
 
-**Script sẽ thực hiện:**
+**Script will perform:**
 
 **STEP 0: Building Lambda Layer**
 - Clean previous builds
@@ -72,15 +72,15 @@ cd D:\Project_AWS\everyonecook
 **STEP 1: Building Lambda modules**
 - Build auth triggers (Pre-Signup, Post-Confirmation, etc.)
 - Build tất cả 7 Lambda modules
-- Clean dist và tsconfig.tsbuildinfo để force fresh compile
+- Clean dist and tsconfig.tsbuildinfo to force fresh compile
 - Compile TypeScript → JavaScript
 
 **STEP 2: Validating dist folders**
 - Check dist folder exists
-- Detect node_modules trong dist (common issue)
+- Detect node_modules in dist (common issue)
 - Check dist size (should be < 10 MB)
 - Verify index.js exists
-- Auto-repair nếu phát hiện issues
+- Auto-repair if issues detected
 
 **STEP 3: Preparing deployment packages**
 - Clean previous artifacts
@@ -94,7 +94,7 @@ cd D:\Project_AWS\everyonecook
 - Update Lambda Layer
 - Update API Gateway
 
-**Output mẫu:**
+**Sample output:**
 
 ```
 ========================================
@@ -154,7 +154,7 @@ FULL DEPLOYMENT SUCCESSFUL!
 ========================================
 ```
 
-#### Bước 3: Verify Deployment
+#### Step 3: Verify Deployment
 
 ```powershell
 # List all Lambda functions
@@ -182,15 +182,15 @@ aws lambda list-functions `
 
 ### Option B: Fast Deployment (Lambda Code Only)
 
-Nếu chỉ thay đổi Lambda code (không thay đổi infrastructure), dùng fast deployment.
+If you only change Lambda code (no infrastructure changes), use fast deployment.
 
-#### Bước 1: Lambda Only Deploy
+#### Step 1: Lambda Only Deploy
 
 ```powershell
-# Fast deploy - chỉ update Lambda code
+# Fast deploy - only update Lambda code
 .\deploy\deploy-backend.ps1 -Environment dev -LambdaOnly
 
-# Hoặc dùng dedicated script
+# Or use dedicated script
 .\deploy\force-update-lambdas.ps1 -Environment dev
 ```
 
@@ -208,17 +208,17 @@ STEP 4: Upload to Lambda (Fast Deploy)
   - Skip CDK (faster)
 ```
 
-**Thời gian:**
+**Time:**
 - Full Deploy (CDK): ~5-8 minutes
 - Lambda Only: ~2-3 minutes
 
-#### Bước 2: Skip Options (Advanced)
+#### Step 2: Skip Options (Advanced)
 
 ```powershell
-# Skip layer build (dùng existing layer)
+# Skip layer build (use existing layer)
 .\deploy\deploy-backend.ps1 -Environment dev -SkipLayer
 
-# Skip module build (dùng existing dist)
+# Skip module build (use existing dist)
 .\deploy\deploy-backend.ps1 -Environment dev -SkipBuild
 
 # Combine options
@@ -227,7 +227,7 @@ STEP 4: Upload to Lambda (Fast Deploy)
 
 ---
 
-### Bước 4: Verify Lambda Functions
+### Step 4: Verify Lambda Functions
 
 #### 1. Check Function Configuration
 
@@ -255,7 +255,7 @@ aws lambda get-function `
   --function-name everyonecook-dev-api-router `
   --query 'Configuration.CodeSha256'
 
-# SHA256 sẽ thay đổi mỗi khi code update
+# SHA256 will change each time code is updated
 ```
 
 #### 3. Check Environment Variables
@@ -277,7 +277,7 @@ aws lambda get-function-configuration `
 
 ---
 
-### Bước 5: Test Lambda Functions
+### Step 5: Test Lambda Functions
 
 #### 1. Test API Router (Health Check)
 
@@ -298,7 +298,7 @@ Get-Content response.json | ConvertFrom-Json
 # }
 ```
 
-#### 2. Warm Up Functions (Tránh Cold Start)
+#### 2. Warm Up Functions (Avoid Cold Start)
 
 ```powershell
 # Warm up all functions
@@ -324,7 +324,7 @@ Write-Host "All functions warmed up!" -ForegroundColor Green
 
 ---
 
-### Bước 6: Check CloudWatch Logs
+### Step 6: Check CloudWatch Logs
 
 #### 1. Tail Logs Real-time
 
@@ -359,7 +359,7 @@ aws logs describe-log-groups `
 
 ---
 
-### Bước 7: Verify API Gateway Integration
+### Step 7: Verify API Gateway Integration
 
 #### 1. Get API Endpoint
 
@@ -413,9 +413,9 @@ aws apigateway get-deployment `
 
 ---
 
-### Bước 8: Verify Cognito Triggers
+### Step 8: Verify Cognito Triggers
 
-Cognito triggers đã được deploy với Auth Stack. Verify:
+Cognito triggers were deployed with Auth Stack. Verify:
 
 ```powershell
 # List Cognito User Pool triggers
@@ -440,7 +440,7 @@ aws cognito-idp describe-user-pool `
 
 ---
 
-### Bước 9: Verify SQS Workers
+### Step 9: Verify SQS Workers
 
 #### 1. Check AI Worker
 
@@ -477,7 +477,7 @@ aws logs tail /aws/lambda/everyonecook-dev-ai-worker --follow
 
 ### Deployment Checklist
 
-Sử dụng checklist này để verify deployment:
+Use this checklist to verify deployment:
 
 #### Build & Package
 - [ ] Lambda Layer built successfully (~15-20 MB)
@@ -542,7 +542,7 @@ npm run build
 # Check for node_modules in dist
 Get-ChildItem -Path services/*/dist/node_modules -Recurse
 
-# Script sẽ auto-remove, hoặc manual:
+# Script will auto-remove, or manual:
 Remove-Item services/auth-module/dist/node_modules -Recurse -Force
 
 # Rebuild
@@ -565,12 +565,12 @@ aws logs tail /aws/lambda/everyonecook-dev-auth-user --since 10m
 #### Issue 4: Function Timeout
 
 ```powershell
-# Increase timeout (via CDK hoặc AWS CLI)
+# Increase timeout (via CDK or AWS CLI)
 aws lambda update-function-configuration `
   --function-name everyonecook-dev-auth-user `
   --timeout 60
 
-# Hoặc update trong backend-stack.ts và redeploy
+# Or update in backend-stack.ts and redeploy
 ```
 
 #### Issue 5: Out of Memory
@@ -581,7 +581,7 @@ aws lambda update-function-configuration `
   --function-name everyonecook-dev-recipe-ai `
   --memory-size 1024
 
-# AI functions cần 1024 MB cho Bedrock calls
+# AI functions need 1024 MB for Bedrock calls
 ```
 
 #### Issue 6: Layer Not Attached
@@ -607,7 +607,7 @@ aws lambda get-function-configuration `
   --function-name everyonecook-dev-auth-user `
   --query 'Environment.Variables'
 
-# Update manually (hoặc via CDK)
+# Update manually (or via CDK)
 aws lambda update-function-configuration `
   --function-name everyonecook-dev-auth-user `
   --environment "Variables={TABLE_NAME=EveryoneCook-dev,REGION=ap-southeast-1}"
@@ -768,7 +768,7 @@ aws cloudwatch put-metric-alarm `
 
 ### Advanced: CI/CD Integration
 
-Để tự động hóa deployment trong GitLab CI/CD:
+To automate deployment in GitLab CI/CD:
 
 ```yaml
 # .gitlab-ci.yml
@@ -787,7 +787,7 @@ deploy-backend:
 
 ### Summary
 
-Trong lab này, bạn đã:
+In this lab, you have:
 
 ✅ **Deploy Lambda Functions**: 7 modules + 5 Cognito triggers  
 ✅ **Deploy Lambda Layer**: Shared dependencies  
@@ -807,7 +807,7 @@ Trong lab này, bạn đã:
 
 ### Next Steps
 
-Backend đã deployed thành công! Tiếp theo:
+Backend deployed successfully! Next steps:
 
 1. ✅ **Test Endpoints**: Verify tất cả API endpoints → [5.08 - Test Endpoints](../5.08-test-endpoints/)
 2. 📝 **Version Control**: Push code to GitLab → [5.09 - Push to GitLab](../5.09-push-gitlab/)

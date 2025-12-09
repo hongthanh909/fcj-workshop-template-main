@@ -8,7 +8,7 @@ pre: " <b> 5.06. </b> "
 
 #### Overview
 
-Sau khi deploy infrastructure, bạn cần cấu hình API Gateway routes và Lambda functions để xử lý business logic.
+After deploying infrastructure, you need to configure API Gateway routes and Lambda functions to handle business logic.
 
 #### API Architecture
 

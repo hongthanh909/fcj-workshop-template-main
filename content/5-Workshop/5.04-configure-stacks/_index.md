@@ -128,7 +128,7 @@ everyonecook/
 
 **Estimated cost**: ~$0.50/month
 
-> **Note**: After deploying this stack, update the nameservers at Hostinger to point to Route 53.
+> **Note**: After deploying this stack, update the nameservers at your domain registrar (e.g., Hostinger) to point to Route 53.
 
 ---
 
@@ -147,7 +147,7 @@ everyonecook/
 
 **Estimated cost**: Free (ACM certificates are free)
 
-> **Important note**: CloudFront only accepts certificates from the us-east-1 region.
+> **Important**: CloudFront only accepts certificates from the us-east-1 region.
 
 ---
 

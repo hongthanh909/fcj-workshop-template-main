@@ -8,7 +8,7 @@ pre: " <b> 5.10. </b> "
 
 #### Overview
 
-Bước cuối cùng là deploy frontend Next.js 15 lên AWS Amplify với tích hợp GitLab để tự động deploy khi có code mới.
+The final step is to deploy the Next.js 15 frontend to AWS Amplify with GitLab integration for automatic deployment when new code is pushed.
 
 #### Step 1: Prepare Frontend Code
 

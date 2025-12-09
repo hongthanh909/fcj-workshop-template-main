@@ -6,9 +6,9 @@ chapter: false
 pre: " <b> 5.05. </b> "
 ---
 
-#### Tổng quan
+#### Overview
 
-Trong bước này, bạn sẽ deploy tất cả infrastructure stacks lên AWS theo đúng thứ tự dependencies. Dự án EveryoneCook sử dụng **5-Stack Architecture** với AWS CDK.
+In this step, you will deploy all infrastructure stacks to AWS in the correct dependency order. The EveryoneCook project uses a **5-Stack Architecture** with AWS CDK.
 
 #### 5-Stack Architecture
 
@@ -41,14 +41,14 @@ Observability Stack (depends on Backend)
 
 | Stack | Time | Critical Resources |
 |-------|------|-------------------|
-| DNS Stack | 2-3 phút | Route 53 Hosted Zone |
-| Certificate Stack | 5-10 phút | ACM Certificate (DNS validation) |
-| Core Stack | 10-15 phút | CloudFront Distribution, DynamoDB |
-| Auth Stack | 5-7 phút | Cognito User Pool, SES |
-| Backend Stack | 8-12 phút | API Gateway, 7 Lambda Functions |
-| Observability Stack | 3-5 phút | CloudWatch Dashboards |
+| DNS Stack | 2-3 min | Route 53 Hosted Zone |
+| Certificate Stack | 5-10 min | ACM Certificate (DNS validation) |
+| Core Stack | 10-15 min | CloudFront Distribution, DynamoDB |
+| Auth Stack | 5-7 min | Cognito User Pool, SES |
+| Backend Stack | 8-12 min | API Gateway, 7 Lambda Functions |
+| Observability Stack | 3-5 min | CloudWatch Dashboards |
 
-**Total deployment time: 35-50 phút**
+**Total deployment time: 35-50 minutes**
 
 ---
 
@@ -94,9 +94,9 @@ Get-Item cdk.json
 
 ### Phase 1: Deploy DNS Stack (Route 53)
 
-DNS Stack tạo Route 53 Hosted Zone cho domain `everyonecook.cloud`. Đây là stack đầu tiên và quan trọng nhất.
+DNS Stack creates Route 53 Hosted Zone for domain `everyonecook.cloud`. This is the first and most important stack.
 
-#### Bước 1.1: Deploy DNS Stack
+#### Step 1.1: Deploy DNS Stack
 
 ```powershell
 # Deploy DNS Stack
@@ -120,9 +120,9 @@ Stack ARN:
 arn:aws:cloudformation:ap-southeast-1:616580903213:stack/EveryoneCook-dev-DNS/...
 ```
 
-#### Bước 1.2: Lưu Nameservers
+#### Step 1.2: Save Nameservers
 
-**LƯU Ý QUAN TRỌNG:** Lưu lại 4 nameservers từ output!
+**IMPORTANT NOTE:** Save the 4 nameservers from the output!
 
 ```powershell
 # Get nameservers
@@ -135,15 +135,15 @@ Write-Host "Nameservers: $nameservers"
 # ns-1164.awsdns-17.org, ns-825.awsdns-39.net, ns-1889.awsdns-44.co.uk, ns-453.awsdns-56.com
 ```
 
-#### Bước 1.3: Update Domain Registrar
+#### Step 1.3: Update Domain Registrar
 
-Cập nhật nameservers tại domain registrar (Hostinger, GoDaddy, Namecheap, etc.):
+Update nameservers at your domain registrar (Hostinger, GoDaddy, Namecheap, etc.):
 
-1. **Login** vào domain registrar
-2. Tìm domain **everyonecook.cloud**
-3. Chọn **"Custom Nameservers"** hoặc **"DNS Settings"**
-4. **Xóa** nameservers cũ
-5. **Nhập** 4 nameservers từ AWS:
+1. **Login** to your domain registrar
+2. Find domain **everyonecook.cloud**
+3. Select **"Custom Nameservers"** or **"DNS Settings"**
+4. **Delete** old nameservers
+5. **Enter** the 4 nameservers from AWS:
    ```
    ns-1164.awsdns-17.org
    ns-825.awsdns-39.net
@@ -152,31 +152,31 @@ Cập nhật nameservers tại domain registrar (Hostinger, GoDaddy, Namecheap, 
    ```
 6. **Save changes**
 
-#### Bước 1.4: Verify DNS Propagation
+#### Step 1.4: Verify DNS Propagation
 
 ```powershell
-# Check DNS propagation (có thể mất 5-30 phút)
+# Check DNS propagation (may take 5-30 minutes)
 nslookup -type=NS everyonecook.cloud
 
-# Hoặc dùng dig (nếu có WSL/Git Bash)
+# Or use dig (if you have WSL/Git Bash)
 dig NS everyonecook.cloud
 
-# Expected: Thấy 4 nameservers từ AWS
+# Expected: See 4 nameservers from AWS
 ```
 
-**Online tools để check:**
+**Online tools to check:**
 - https://www.whatsmydns.net/
 - https://dnschecker.org/
 
-⏳ **Đợi DNS propagate** trước khi tiếp tục (thường 5-15 phút)
+⏳ **Wait for DNS to propagate** before continuing (usually 5-15 minutes)
 
 ---
 
 ### Phase 1.5: Deploy Certificate Stack (ACM)
 
-**QUAN TRỌNG:** Stack này phải deploy ở **us-east-1** region vì CloudFront requirement.
+**IMPORTANT:** This stack must be deployed in **us-east-1** region due to CloudFront requirement.
 
-#### Bước 1.5.1: Deploy Certificate Stack
+#### Step 1.5.1: Deploy Certificate Stack
 
 ```powershell
 # Deploy Certificate Stack (us-east-1)
@@ -185,18 +185,18 @@ npx cdk deploy EveryoneCook-dev-Certificate --context environment=dev
 # Type 'y' to confirm
 ```
 
-**Stack tạo 2 certificates:**
+**Stack creates 2 certificates:**
 1. **CloudFront Certificate** (us-east-1): `cdn-dev.everyonecook.cloud`
 2. **API Gateway Certificate** (us-east-1): `*.everyonecook.cloud` (wildcard)
 
-#### Bước 1.5.2: Wait for DNS Validation
+#### Step 1.5.2: Wait for DNS Validation
 
-ACM sẽ tự động:
-- Tạo CNAME records trong Route 53 để validate domain
+ACM will automatically:
+- Create CNAME records in Route 53 to validate domain
 - Validate ownership
 - Issue certificates
 
-**Quá trình này mất 5-10 phút.**
+**This process takes 5-10 minutes.**
 
 ```powershell
 # Check certificate status
@@ -220,7 +220,7 @@ aws acm describe-certificate --certificate-arn $certArn --region us-east-1 `
 }
 ```
 
-#### Bước 1.5.3: Verify Certificates
+#### Step 1.5.3: Verify Certificates
 
 ```powershell
 # List all certificates
@@ -234,15 +234,15 @@ aws cloudformation describe-stacks `
 # ApiGatewayCertificateArn = arn:aws:acm:us-east-1:...:certificate/...
 ```
 
-✅ **Chờ đến khi cả 2 certificates có Status = ISSUED**
+✅ **Wait until both certificates have Status = ISSUED**
 
 ---
 
 ### Phase 2: Deploy Core Stack (Foundation)
 
-Core Stack tạo foundation resources: DynamoDB, S3, CloudFront, KMS.
+Core Stack creates foundation resources: DynamoDB, S3, CloudFront, KMS.
 
-#### Bước 2.1: Deploy Core Stack
+#### Step 2.1: Deploy Core Stack
 
 ```powershell
 # Deploy Core Stack (takes 10-15 minutes)
@@ -251,7 +251,7 @@ npx cdk deploy EveryoneCook-dev-Core --context environment=dev
 # Type 'y' to confirm
 ```
 
-**Stack tạo:**
+**Stack creates:**
 
 **DynamoDB:**
 - Table: `EveryoneCook-dev`
@@ -277,9 +277,9 @@ npx cdk deploy EveryoneCook-dev-Core --context environment=dev
 - DynamoDB encryption key
 - S3 encryption key
 
-#### Bước 2.2: Monitor Deployment
+#### Step 2.2: Monitor Deployment
 
-Deployment này mất lâu nhất (10-15 phút) do CloudFront Distribution.
+This deployment takes the longest (10-15 minutes) due to CloudFront Distribution.
 
 ```powershell
 # In another terminal, monitor CloudFormation events
@@ -290,7 +290,7 @@ aws cloudformation describe-stack-events `
   --output table
 ```
 
-#### Bước 2.3: Verify Core Resources
+#### Step 2.3: Verify Core Resources
 
 ```powershell
 # Check DynamoDB table
@@ -326,7 +326,7 @@ aws cloudfront list-distributions `
 # }
 ```
 
-#### Bước 2.4: Get Stack Outputs
+#### Step 2.4: Get Stack Outputs
 
 ```powershell
 # Get all Core Stack outputs
@@ -346,9 +346,9 @@ aws cloudformation describe-stacks `
 
 ### Phase 3: Deploy Auth Stack (Cognito & SES)
 
-Auth Stack tạo authentication infrastructure với Cognito và SES.
+Auth Stack creates authentication infrastructure with Cognito and SES.
 
-#### Bước 3.1: Deploy Auth Stack
+#### Step 3.1: Deploy Auth Stack
 
 ```powershell
 # Deploy Auth Stack
@@ -357,7 +357,7 @@ npx cdk deploy EveryoneCook-dev-Auth --context environment=dev
 # Type 'y' to confirm
 ```
 
-**Stack tạo:**
+**Stack creates:**
 
 **Cognito User Pool:**
 - User Pool: `EveryoneCook-UserPool-dev`
@@ -382,7 +382,7 @@ npx cdk deploy EveryoneCook-dev-Auth --context environment=dev
 - Lambda execution roles
 - Cognito SMS role (for MFA)
 
-#### Bước 3.2: Verify Cognito User Pool
+#### Step 3.2: Verify Cognito User Pool
 
 ```powershell
 # Get User Pool ID
@@ -399,7 +399,7 @@ aws cognito-idp describe-user-pool --user-pool-id $userPoolId `
   --query 'UserPool.{Name:Name,Status:Status,MFA:MfaConfiguration}'
 ```
 
-#### Bước 3.3: Verify Lambda Triggers
+#### Step 3.3: Verify Lambda Triggers
 
 ```powershell
 # Check Lambda triggers attached to User Pool
@@ -416,7 +416,7 @@ aws cognito-idp describe-user-pool --user-pool-id $userPoolId `
 # }
 ```
 
-#### Bước 3.4: Verify SES Email Identity
+#### Step 3.4: Verify SES Email Identity
 
 ```powershell
 # Check SES identity status
@@ -435,15 +435,15 @@ aws route53 list-resource-record-sets `
   --query 'ResourceRecordSets[?Type==`CNAME` && contains(Name, `_domainkey`)]'
 ```
 
-✅ **SES phải ở Production mode để send email đến bất kỳ địa chỉ nào**
+✅ **SES must be in Production mode to send email to any address**
 
 ---
 
 ### Phase 4: Deploy Backend Stack (API & Lambda)
 
-Backend Stack tạo API Gateway và Lambda functions. **Trước khi deploy, cần build Lambda code.**
+Backend Stack creates API Gateway and Lambda functions. **Before deploying, you need to build Lambda code.**
 
-#### Bước 4.1: Build Lambda Code
+#### Step 4.1: Build Lambda Code
 
 ```powershell
 # Navigate to project root
@@ -462,9 +462,9 @@ cd services/admin-module; npm run build; cd ../..
 cd services/upload-module; npm run build; cd ../..
 ```
 
-⚠️ **QUAN TRỌNG:** Lambda code phải được build TRƯỚC khi deploy Backend Stack!
+⚠️ **IMPORTANT:** Lambda code must be built BEFORE deploying Backend Stack!
 
-#### Bước 4.2: Deploy Backend Stack
+#### Step 4.2: Deploy Backend Stack
 
 ```powershell
 # Navigate back to infrastructure
@@ -476,7 +476,7 @@ npx cdk deploy EveryoneCook-dev-Backend --context environment=dev
 # Type 'y' to confirm
 ```
 
-**Stack tạo:**
+**Stack creates:**
 
 **API Gateway:**
 - REST API: `EveryoneCook-API-dev`
@@ -508,7 +508,7 @@ npx cdk deploy EveryoneCook-dev-Backend --context environment=dev
 - Rate limiting (2000 req/5min per IP)
 - Geo blocking support
 
-#### Bước 4.3: Verify API Gateway
+#### Step 4.3: Verify API Gateway
 
 ```powershell
 # Get API endpoint
@@ -533,7 +533,7 @@ $response | ConvertTo-Json
 # }
 ```
 
-#### Bước 4.4: Verify Lambda Functions
+#### Step 4.4: Verify Lambda Functions
 
 ```powershell
 # List all Lambda functions
@@ -544,7 +544,7 @@ aws lambda list-functions `
 # Expected: 7 functions + 5 Cognito triggers = 12 Lambda functions total
 ```
 
-#### Bước 4.5: Verify SQS Queues
+#### Step 4.5: Verify SQS Queues
 
 ```powershell
 # List SQS queues
@@ -565,9 +565,9 @@ aws sqs list-queues --queue-name-prefix everyonecook-dev
 
 ### Phase 5: Deploy Observability Stack (CloudWatch)
 
-Observability Stack tạo monitoring dashboards và alarms.
+Observability Stack creates monitoring dashboards and alarms.
 
-#### Bước 5.1: Deploy Observability Stack
+#### Step 5.1: Deploy Observability Stack
 
 ```powershell
 # Deploy Observability Stack
@@ -576,7 +576,7 @@ npx cdk deploy EveryoneCook-dev-Observability --context environment=dev
 # Type 'y' to confirm
 ```
 
-**Stack tạo:**
+**Stack creates:**
 
 **4 CloudWatch Dashboards:**
 1. **Core Dashboard** - DynamoDB, S3, CloudFront metrics
@@ -598,7 +598,7 @@ npx cdk deploy EveryoneCook-dev-Observability --context environment=dev
 - Critical system health alarm
 - Aggregates multiple alarms
 
-#### Bước 5.2: Subscribe to SNS Topic
+#### Step 5.2: Subscribe to SNS Topic
 
 ```powershell
 # Get SNS topic ARN
@@ -616,7 +616,7 @@ aws sns subscribe `
 Write-Host "Check your email and confirm subscription!"
 ```
 
-#### Bước 5.3: Verify Dashboards
+#### Step 5.3: Verify Dashboards
 
 ```powershell
 # List CloudWatch dashboards
@@ -639,7 +639,7 @@ Write-Host "Dashboard URL: https://console.aws.amazon.com/cloudwatch/home?region
 
 ### Verify Complete Deployment
 
-#### Bước 6.1: List All Stacks
+#### Step 6.1: List All Stacks
 
 ```powershell
 # List all deployed stacks
@@ -665,7 +665,7 @@ aws cloudformation list-stacks `
 +--------------------------------------------------+--------+
 ```
 
-#### Bước 6.2: Get All Stack Outputs
+#### Step 6.2: Get All Stack Outputs
 
 ```powershell
 # Create comprehensive outputs report
@@ -683,7 +683,7 @@ foreach ($stack in $stacks) {
 }
 ```
 
-#### Bước 6.3: Save Outputs to File
+#### Step 6.3: Save Outputs to File
 
 ```powershell
 # Save outputs to infrastructure/outputs.json
@@ -709,7 +709,7 @@ $outputs | ConvertTo-Json -Depth 5 | Out-File -FilePath "outputs.json" -Encoding
 Write-Host "Outputs saved to outputs.json" -ForegroundColor Green
 ```
 
-#### Bước 6.4: Verify Key Resources
+#### Step 6.4: Verify Key Resources
 
 ```powershell
 # Comprehensive resource verification
@@ -970,7 +970,7 @@ aws ce get-cost-and-usage `
 
 ### Next Steps
 
-Infrastructure deployment hoàn thành! Tiếp theo:
+Infrastructure deployment complete! Next steps:
 
 1. ✅ **Verify All Stacks**: All 6 stacks deployed successfully
 2. 🔧 **Configure API**: Setup API routes và Lambda integration → [5.06 - Configure API & Lambda](../5.06-configure-api-lambda/)
@@ -979,7 +979,7 @@ Infrastructure deployment hoàn thành! Tiếp theo:
 
 **Current Status:**
 - Infrastructure: ✅ Complete
-- Lambda Code: ⏳ Need to deploy
+- Lambda Code: ⏳ Needs deployment
 - Testing: ⏳ Pending
 
 Proceed to: [5.06 - Configure API & Lambda](../5.06-configure-api-lambda/)
