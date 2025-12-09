@@ -5,7 +5,6 @@ weight: 1
 chapter: false
 pre: " <b> 5.01. </b> "
 ---
-
 #### EveryoneCook Architecture
 
 **EveryoneCook** is a modern social cooking platform built entirely on AWS serverless technologies. The architecture follows best practices for scalability, security, and cost optimization, with a focus on Vietnamese ingredient support and AI-powered recipe suggestions.
@@ -23,7 +22,82 @@ pre: " <b> 5.01. </b> "
 
 #### Architecture Diagram
 
-![EveryoneCook Architecture](/images/architecture-diagram.png)
+
+    ┌─────────────────────────────────┐
+                    │      Route 53 DNS               │
+                    │   everyonecook.cloud            │
+                    └──────┬──────────────┬───────────┘
+                           │              │
+                ┌──────────▼──────┐  ┌───▼──────────────┐
+                │  CloudFront CDN │  │ Amplify Hosting  │
+                │  cdn.*          │  │ everyonecook.*   │
+                │  (Shield Std)   │  │ Next.js 15       │
+                └──────┬──────────┘  └──────────────────┘
+                       │ OAC
+                ┌──────▼──────────────────────────────┐
+                │      S3 Buckets (4)                 │
+                │  - Content (avatars, posts)         │
+                │  - Logs (CloudWatch archive)        │
+                │  - Emails (SES incoming)            │
+                │  - CDN Logs (CloudFront)            │
+                │  Intelligent-Tiering + KMS          │
+                └─────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│                    API Gateway (api.*)                          │
+│              Cognito Authorizer + WAF                           │
+└──────────────────────────┬─────────────────────────────────────┘
+                           │
+                  ┌────────▼────────┐
+                  │   API Router    │
+                  │   Lambda        │
+                  └────────┬────────┘
+                           │
+        ┌──────────────────┼──────────────────┐
+        │                  │                  │
+   ┌────▼────┐      ┌─────▼─────┐     ┌─────▼─────┐
+   │  Auth   │      │  Social   │     │  Recipe   │
+   │  Module │      │  Module   │     │  + AI     │
+   └────┬────┘      └─────┬─────┘     └─────┬─────┘
+        │                  │                  │
+   ┌────▼────┐      ┌─────▼─────┐           │
+   │  Admin  │      │  Upload   │           │
+   │  Module │      │  Module   │           │
+   └────┬────┘      └─────┬─────┘           │
+        │                  │                  │
+        └──────────────────┼──────────────────┘
+                           │
+        ┌──────────────────┼──────────────────┐
+        │                  │                  │
+   ┌────▼────────┐   ┌────▼────────┐   ┌────▼────────┐
+   │  DynamoDB   │   │  OpenSearch │   │  Bedrock AI │
+   │  Single     │   │  Vietnamese │   │  Claude 3.5 │
+   │  Table      │   │  Analyzer   │   │  Sonnet v2  │
+   └─────────────┘   └─────────────┘   └─────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│                    SQS Queues (6)                               │
+│  AI | Email | SearchIndex | Image | Analytics | Notification   │
+└──────────────────────────┬─────────────────────────────────────┘
+                           │
+                  ┌────────▼────────┐
+                  │  Search Sync    │
+                  │  Worker Lambda  │
+                  └─────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│              Cognito User Pool + 5 Lambda Triggers              │
+│  Post-Confirmation | Pre-Auth | Post-Auth | Custom-Msg | Pre-Signup │
+└────────────────────────────┬───────────────────────────────────┘
+                             │
+                    ┌────────▼────────┐
+                    │   SES Email     │
+                    │   DKIM + SPF    │
+                    └─────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│         CloudWatch Dashboards + Alarms + X-Ray Tracing          │
+└────────────────────────────────────────────────────────────────┘
 
 #### Workshop Flow
 
@@ -57,16 +131,19 @@ This workshop follows a practical application development workflow:
 #### Realistic Cost Estimate (Low Traffic Scenarios)
 
 **Scenario 1: 100-500 Active Users/Day (2 hours usage)**
+
 - **Monthly Active Users**: ~3,000-15,000
 - **Daily Requests**: ~5,000-25,000 API calls
 - **Estimated Monthly Cost**: **$12-18/month** ($0.40-0.60/day)
 
 **Scenario 2: 1,000 Active Users/Day (2 hours usage)**
+
 - **Monthly Active Users**: ~30,000
 - **Daily Requests**: ~50,000 API calls
 - **Estimated Monthly Cost**: **$25-35/month** ($0.83-1.17/day)
 
 **Key Cost Factors**:
+
 + **DynamoDB**: PROVISIONED mode (2 RCU/WCU) with auto-scaling → $1.25/month base + $0.50-3/month scaling
 + **Lambda**: 6 functions (512MB-1GB memory) → $2-8/month (first 1M requests free)
 + **CloudFront**: PriceClass 200 (Asia/US/Europe) → $1-5/month (first 1TB free, then $0.085/GB)
@@ -79,6 +156,7 @@ This workshop follows a practical application development workflow:
 + **WAF**: API Gateway only (no CloudFront WAF) → $5/month base + $0.60/million requests
 
 **Cost Optimization Applied**:
+
 + X-Ray tracing disabled (saves $5-10/month)
 + CloudFront WAF removed, using Shield Standard (saves $6/month)
 + DynamoDB PROVISIONED mode with low baseline (2 RCU/WCU) instead of ON_DEMAND
