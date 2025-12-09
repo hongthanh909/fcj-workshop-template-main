@@ -7,7 +7,7 @@ pre: " <b> 5.02. </b> "
 ---
 #### Overview
 
-In this step, you will install all the necessary tools to develop and deploy the EveryoneCook application.
+Trong bước này, bạn sẽ cài đặt tất cả các công cụ cần thiết để phát triển và deploy ứng dụng EveryoneCook.
 
 #### Required Tools
 
@@ -24,9 +24,6 @@ node --version  # Should be v20.x
 npm --version
 ```
 
-![Node.js Installation](/images/5-Workshop/5.2-setup-environment/nodejs-version.png)
-*Screenshot: Terminal showing Node.js 20.x installed*
-
 **2. AWS CLI v2**
 
 ```bash
@@ -41,9 +38,6 @@ sudo ./aws/install
 aws --version
 ```
 
-![AWS CLI Installation](/images/5-Workshop/5.2-setup-environment/aws-cli-version.png)
-*Screenshot: Terminal showing AWS CLI v2 installed*
-
 **3. AWS CDK CLI**
 
 ```bash
@@ -54,9 +48,6 @@ npm install -g aws-cdk
 cdk --version
 ```
 
-![CDK CLI Installation](/images/5-Workshop/5.2-setup-environment/cdk-version.png)
-*Screenshot: Terminal showing CDK CLI installed*
-
 **4. Git**
 
 ```bash
@@ -66,8 +57,6 @@ cdk --version
 # Verify installation
 git --version
 ```
-
-![Git Installation](/images/5-Workshop/5.2-setup-environment/git-version.png)
 
 **5. Code Editor**
 
@@ -96,9 +85,6 @@ For security, don't use root account
 1. Go to IAM Console → Users → Create user
 2. Create user and save credentials
 
-![IAM User Created](/images/5-Workshop/5.2-setup-environment/iam-user-created.png)
-*Screenshot: IAM console showing user created with AdministratorAccess*
-
 **3. Configure AWS CLI**
 
 ```bash
@@ -112,9 +98,6 @@ aws configure
 # Default output format: json
 ```
 
-![AWS CLI Configure](/images/5-Workshop/5.2-setup-environment/aws-cli-configure.png)
-*Screenshot: Terminal showing aws configure completed*
-
 **4. Verify AWS Access**
 
 ```bash
@@ -123,8 +106,6 @@ aws sts get-caller-identity
 
 # Should return your account ID and user ARN
 ```
-
-![AWS Access Verified](/images/5-Workshop/5.2-setup-environment/aws-sts-identity.png)
 
 #### Domain Setup (Optional)
 
@@ -136,19 +117,14 @@ Buy domain name on hpanel.hostinger
 Route 53 creates dns record to hostinger
 For this workshop, we use: `everyonecook.cloud`
 
-![AWS DNS](/images/5-Workshop/5.2-setup-environment/hostinger.png)
-![AWS DNS](/images/5-Workshop/5.2-setup-environment/DNS_record.png)
-
 **2. Note Domain Registrar**
 
 You'll need access to domain registrar to update nameservers later.
 
 #### GitLab Setup
 
-**Create GitLab Repo**
-
-![GitLab Access Token](/images/5-Workshop/5.2-setup-environment/gitlab-repo.png)
-*Screenshot: GitLab showing personal access token created*
+**Create GitLab Repo
+*Screenshot: GitLab showing personal access token created***
 
 **3. Configure Git**
 
@@ -282,7 +258,3 @@ aws configure
 #### Next Steps
 
 Once your environment is set up, proceed to [CDK Bootstrap](https://hviethub.github.io/Internship-Report/5-workshop/5.3-cdk-bootstrap/) to prepare your AWS account for CDK deployments.
-
-#### Next Steps
-
-Once your environment is set up, proceed to [CDK Bootstrap](../5.3-cdk-bootstrap/) to prepare your AWS account for CDK deployments.

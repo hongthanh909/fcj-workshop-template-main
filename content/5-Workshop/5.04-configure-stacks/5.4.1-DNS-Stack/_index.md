@@ -3,6 +3,7 @@ title: "5.4.1 DNS Stack"
 weight: 1
 ---
 ---
+
 # DNS Stack - Route 53 Hosted Zone
 
 ## Overview
@@ -280,7 +281,9 @@ arn:aws:cloudformation:ap-southeast-1:123456789012:stack/EveryoneCook-dev-DNS/..
 - **Records**: 2 (NS and SOA records - automatically created)
 
 ![Route 53 Hosted Zone](/images/5-Workshop/5.4-configure-stacks/host_router53.jpg)
-*Route 53 Hosted Zone showing domain details, NS records (4 nameservers), and SOA record*
+
+Location of nameserver records in Route 53 console
+
 
 ### Step 4: Copy Nameservers
 
@@ -294,7 +297,8 @@ ns-5678.awsdns-01.co.uk
 ```
 
 ![Route 53 Nameservers](/images/5-Workshop/5.2-setup-environment/DNS_record.png)
-*Location of nameserver records in Route 53 console*
+
+Route 53 Hosted Zone showing domain details, NS records (4 nameservers), and SOA record
 
 ---
 
