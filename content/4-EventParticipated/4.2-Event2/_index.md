@@ -25,13 +25,13 @@ pre: " <b> 4.2. </b> "
 
 #### Transitioning to modern application architecture – Microservices
 
-## 1. Infrastructure as Code (IaC)
+### 1. Infrastructure as Code (IaC)
 
 * IaC eliminates ClickOps limitations such as slowness, inconsistency, and human errors (shown on  *slide 7* ).
 * Key benefits: automation, scalability, reproducibility, and improved team collaboration.
 * Helps maintain reliable infrastructure by avoiding manual configuration drift.
 
-## 2. AWS CloudFormation
+### 2. AWS CloudFormation
 
 * AWS’s native IaC tool using **YAML/JSON** templates.
 * Key concepts:
@@ -46,7 +46,7 @@ pre: " <b> 4.2. </b> "
     * `Outputs` – values like public IP for cross-stack usage
 * Supports **Drift Detection** to identify manual changes outside CloudFormation.
 
-## 3. AWS CDK (Cloud Development Kit)
+### 3. AWS CDK (Cloud Development Kit)
 
 * An open-source IaC framework using programming languages (TypeScript, Python, Java, Go, C#, etc.).
 * Uses the **constructs** model:
@@ -67,13 +67,13 @@ pre: " <b> 4.2. </b> "
 * `cdk import`.
 * CDK synthesizes CloudFormation templates before deployment.
 
-## 4. Docker & Container Fundamentals
+### 4. Docker & Container Fundamentals
 
 * Docker standardizes application packaging across environments.
 * **Containers vs VMs** (slide 68): containers are lightweight, fast, and resource-efficient.
 * Docker pipeline:  **Dockerfile → Image → Container** ; images stored in registries like  **ECR** .
 
-## 5. Amazon ECR
+### 5. Amazon ECR
 
 * AWS’s fully managed private container registry.
 * Key features:
@@ -82,7 +82,7 @@ pre: " <b> 4.2. </b> "
   * Lifecycle policies
   * Encryption & IAM control
 
-## 6. Amazon ECS
+### 6. Amazon ECS
 
 * Fully managed container orchestration service from AWS.
 * Two launch types:
@@ -94,7 +94,7 @@ pre: " <b> 4.2. </b> "
   * **Task**
   * **Service**
 
-## 7. Amazon EKS
+### 7. Amazon EKS
 
 * Fully managed **Kubernetes** service on AWS.
 * Automates control plane operations, scaling, and upgrades.
@@ -103,7 +103,7 @@ pre: " <b> 4.2. </b> "
   * **ECS** : simpler, deeply AWS integrated, less operational overhead
   * **EKS** : Kubernetes standard, more flexibility, higher complexity
 
-## 8. AWS App Runner
+### 8. AWS App Runner
 
 * A quick and managed way to deploy web applications and APIs from GitHub or ECR.
 * Provides automatic build, scaling, security, and HTTPS endpoint.
@@ -143,12 +143,6 @@ pre: " <b> 4.2. </b> "
 * Live demos on CloudFormation and ECS made the deployment workflow easier to understand.
 * Discussions highlighted how IaC and containerization reduce operational burden and improve scalability.
 
-#### Some event photos
-
-Dưới đây là  **phiên bản tóm gọn bằng tiếng Anh** , vẫn dựa đúng nội dung từ file PDF:
-
----
-
 ### Hands-on Technical Exposure (Summary)
 
 * Practiced defining infrastructure using  **CloudFormation templates** , including parameters, mappings, conditions, and outputs.
@@ -178,4 +172,6 @@ Dưới đây là  **phiên bản tóm gọn bằng tiếng Anh** , vẫn dựa 
 
 ### Event Photos
 
-*Add your photos here…*
+<img src="/images/event2.1.jpg" alt="Event 2.1" width="450">
+
+<img src="/images/event2.jpg" alt="Event 2" width="450">
