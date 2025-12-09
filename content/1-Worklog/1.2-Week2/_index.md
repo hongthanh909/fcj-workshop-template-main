@@ -18,10 +18,10 @@ pre: " <b> 1.2. </b> "
 
 | Day | Task                     | Start Date | Completion Date | Reference Material |
 | --- | ------------------------ | ---------- | --------------- | ------------------ |
-| 2   | VPC (cont)               | 09/18/2025 | 09/18/2025      |                    |
-| 3   | Hydrid DNS & Route 53    | 09/19/2025 | 09/19/2025      |                    |
-| 4   | VPC Peering              | 09/20/2025 | 09/20/2025      |                    |
-| 5   | Transit Gateway          | 09/21/2025 | 09/21/2025      |                    |
+| 2   | VPC (cont)               | 09/18/2025 | 09/18/2025      | cont               |
+| 3   | Hydrid DNS & Route 53    | 09/19/2025 | 09/19/2025      | cont               |
+| 4   | VPC Peering              | 09/20/2025 | 09/20/2025      | cont               |
+| 5   | Transit Gateway          | 09/21/2025 | 09/21/2025      | cont               |
 | 6   | Weekly knowledge summary | 09/22/2025 | 09/22/2025      |                    |
 
 ### 1. VPC (Lab)

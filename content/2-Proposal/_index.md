@@ -18,39 +18,39 @@ pre: " <b> 2. </b> "
 
 # TABLE OF CONTENTS
 
-**1. [BACKGROUND AND MOTIVATION](#background-and-motivation)**
+**1. [BACKGROUND AND MOTIVATION](#1-background-and-motivation)**
 
-&nbsp;&nbsp;&nbsp;&nbsp;1.1 [Executive Summary](#executive-summary)
+&nbsp;&nbsp;&nbsp;&nbsp;1.1 [Executive Summary](#11-executive-summary)
 
-&nbsp;&nbsp;&nbsp;&nbsp;1.2 [Project Success Criteria](#project-success-criteria)
+&nbsp;&nbsp;&nbsp;&nbsp;1.2 [Project Success Criteria](#12-project-success-criteria)
 
-&nbsp;&nbsp;&nbsp;&nbsp;1.3 [Assumptions](#assumptions)
+&nbsp;&nbsp;&nbsp;&nbsp;1.3 [Assumptions](#13-assumptions)
 
-**2. [SOLUTION ARCHITECTURE / ARCHITECTURAL DIAGRAM](#solution-architecture-architectural-diagram)**
+**2. [SOLUTION ARCHITECTURE / ARCHITECTURAL DIAGRAM](#2-solution-architecture--architectural-diagram)**
 
-&nbsp;&nbsp;&nbsp;&nbsp;2.1 [Technical Architecture Diagram](#technical-architecture-diagram)
+&nbsp;&nbsp;&nbsp;&nbsp;2.1 [Technical Architecture Diagram](#21-technical-architecture-diagram)
 
-&nbsp;&nbsp;&nbsp;&nbsp;2.2 [Technical Plan](#technical-plan)
+&nbsp;&nbsp;&nbsp;&nbsp;2.2 [Technical Plan](#22-technical-plan)
 
-&nbsp;&nbsp;&nbsp;&nbsp;2.3 [Project Plan](#project-plan)
+&nbsp;&nbsp;&nbsp;&nbsp;2.3 [Project Plan](#23-project-plan)
 
-&nbsp;&nbsp;&nbsp;&nbsp;2.4 [Security Considerations](#security-considerations)
+&nbsp;&nbsp;&nbsp;&nbsp;2.4 [Security Considerations](#24-security-considerations)
 
-**3. [ACTIVITIES AND DELIVERABLES](#activities-and-deliverables)**
+**3. [ACTIVITIES AND DELIVERABLES](#3-activities-and-deliverables)**
 
-&nbsp;&nbsp;&nbsp;&nbsp;3.1 [Activities and deliverables](#activities-and-deliverables-1)
+&nbsp;&nbsp;&nbsp;&nbsp;3.1 [Activities and Deliverables](#31-activities-and-deliverables)
 
-&nbsp;&nbsp;&nbsp;&nbsp;3.2 [Out of Scope](#out-of-scope)
+&nbsp;&nbsp;&nbsp;&nbsp;3.2 [Out of Scope](#32-out-of-scope)
 
-&nbsp;&nbsp;&nbsp;&nbsp;3.3 [Path to Production](#path-to-production)
+&nbsp;&nbsp;&nbsp;&nbsp;3.3 [Path to Production](#33-path-to-production)
 
-**4. [EXPECTED AWS COST BREAKDOWN BY SERVICES](#expected-aws-cost-breakdown-by-services)**
+**4. [EXPECTED AWS COST BREAKDOWN BY SERVICES](#4-expected-aws-cost-breakdown-by-services)**
 
-**5. [TEAM](#team)**
+**5. [TEAM](#5-team)**
 
-**6. [RESOURCES & COST ESTIMATES](#resources-cost-estimates)**
+**6. [RESOURCES & COST ESTIMATES](#6-resources--cost-estimates)**
 
-**7. [ACCEPTANCE](#acceptance)**
+**7. [ACCEPTANCE](#7-acceptance)**
 
 # 1. BACKGROUND AND MOTIVATION
 

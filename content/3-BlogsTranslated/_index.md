@@ -6,28 +6,22 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-This section will list and introduce the blogs you have translated. For example:
+This section contains AWS blog posts that I have translated from English to Vietnamese during the internship program.
 
-### [Blog 1 - Getting started with healthcare data lakes: Using microservices](3.1-Blog1/)
+---
 
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+### [Blog 1 - How to SAN Boot Enterprise Amazon EC2 Environments from Amazon FSx for NetApp ONTAP](3.1-Blog1/)
 
-### [Blog 2 - ...](3.2-Blog2/)
+This blog explains how to implement SAN boot for Amazon EC2 instances using Amazon FSx for NetApp ONTAP. You will learn about the benefits of boot-from-SAN including centralized management, thin cloning with golden images, cost reduction through snapshot-based cloning, and simplified HA/DR workflows. The article covers the technical boot process using iPXE chain-loading and best practices for production deployments.
 
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+---
 
-### [Blog 3 - ...](3.3-Blog3/)
+### [Blog 2 - Querying Amazon S3 Tables from Open-Source Trino Using the Apache Iceberg REST Endpoint](3.2-Blog2/)
 
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+This blog demonstrates how to integrate Trino with Amazon S3 Tables using the Iceberg REST endpoint. You will learn how to deploy a Trino environment using CloudFormation, configure the Iceberg REST connector, create schemas and tables, perform read/write operations, and use advanced features like time travel and schema evolution. The solution provides a powerful analytics platform combining Trino's distributed query engine with S3 Tables' built-in optimizations.
 
-### [Blog 4 - ...](3.4-Blog4/)
+---
 
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+### [Blog 3 - SMS Onboarding for SaaS, ISVs, and Multi-Tenant Applications with AWS End User Messaging](3.3-Blog3/)
 
-### [Blog 5 - ...](3.5-Blog5/)
-
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
-
-### [Blog 6 - ...](3.6-Blog6/)
-
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+This blog provides a comprehensive guide for technology providers integrating SMS capabilities into their products. You will learn about opt-in flows, architectural models for implementing SMS services (from "Bring Your Own AWS Account" to "Fully Managed Program"), pricing strategies, geographic considerations, and best practices to reduce friction during implementation. The article helps SaaS companies, ISVs, and multi-tenant solution providers navigate the complex SMS landscape.

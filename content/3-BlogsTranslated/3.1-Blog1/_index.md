@@ -1,120 +1,130 @@
 ---
-title: "Blog 1 "
-date: 2025-08-26
-weight: 3
+title: "Blog 1"
+date: 2025-06-13
+weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
+# How to SAN Boot Enterprise Amazon EC2 Environments from Amazon FSx for NetApp ONTAP
 
-
-# AWS services scale to new heights for Prime Day 2025: key metrics and milestones
-
-- AWS provided the backbone infrastructure, scaling to handle unprecedented traffic and transactions.
+**Author:** Randy Seamans
+**Published:** June 13, 2025
+**Source:** Advanced (300), Amazon EC2, Amazon Elastic Block Store (Amazon EBS), Amazon FSx for NetApp ONTAP, AWS Partner Network, Migration, Storage, Thought Leadership
 
 ---
 
-## Record-Breaking Metrics:
+## Introduction
 
-- AWS Outposts: Sent 524M+ commands to 7,000 robots, peaking at 8M commands/hour (+160% vs 2024).
+Traditionally, many enterprises and organizations using on-premises infrastructure have deployed boot-from-SAN (Storage Area Network) instead of using locally attached storage. Booting from SAN provides centralized management and backup of boot volumes, supports high availability through multipathing, and offers greater flexibility by allowing systems to boot from pre-configured OS images stored on shared storage arrays to reduce costs.
 
-- Amazon EC2 (Graviton): Powered 40%+ of Amazon.com compute; deployed 87,000 Inferentia & Trainium chips for AI workloads.
+Amazon FSx for NetApp ONTAP brings these benefits to the cloud. As a fully managed service by Amazon Web Services (AWS), FSx for ONTAP provides an enterprise-grade virtual storage array supporting features such as high-throughput I/O, deduplication, compression, compaction, replication, and block-level access through iSCSI and NVMe/TCP.
 
-- Amazon SageMaker: Processed 626B inference requests.
+Most importantly for SAN boot is the thin cloning capability. FSx for ONTAP allows a thinly provisioned LUN to act as a base "golden image" for the operating system (OS). Read-write snapshot clones of this LUN can be rapidly provisioned and distributed to hundreds of servers as separate boot volumes. Each clone only stores the minimal differences to identify each server, significantly reducing total storage capacity requirements.
 
-- Amazon ECS + Fargate: Averaged 18.4M tasks/day, +77% vs 2024.
+Furthermore, FSx for ONTAP is aware of shared data regions, allowing frequently accessed blocks to be cached in memory once and served to all clones, effectively extending cache efficiency and improving overall performance. Since FSx for ONTAP also provides high availability (HA) and disaster recovery (DR) through advanced replication mechanisms, boot volumes can be integrated into HA/DR workflows. This ensures OS state remains consistent across environments without manual intervention.
 
-- AWS Lambda: Handled 1.7T invocations/day.
+---
 
-- Amazon API Gateway: Processed 1T internal requests/day, +30% YoY.
+## Background on Boot Devices in AWS
 
-- Amazon CloudFront: Delivered 3T HTTP requests, +43% vs 2024.
+AWS instances typically boot from Amazon Elastic Block Store (Amazon EBS) volumes, which are tightly integrated with Amazon Elastic Compute Cloud (Amazon EC2). This integration enables fast and stable boot times through features like EBS Fast Snapshot Restore and EBS Provisioned IOPS for volume initialization.
 
-- Amazon EBS: Peaked at 20.3T I/O ops, moving nearly 1 exabyte/day.
+Amazon EBS also provides enhanced security with customer-managed key (CMK) encryption, high reliability through independently operating boot volumes, and time-based AMI copies for efficient and consistent distribution across Regions. Designed for both general-purpose and high-performance workloads, Amazon EBS is the default boot device for Amazon EC2.
 
-- Amazon Aurora: 500B transactions, 4,071 TB stored, 999 TB transferred.
+In this article, I will demonstrate how you can boot from iSCSI LUNs stored on FSx for ONTAP file systems in either Single-Availability Zone (AZ) or Multi-AZ configurations. These LUNs can be thin provisioned, space-efficient, and replicated between AZs or different AWS Regions.
 
-- Amazon DynamoDB: Peaked at 151M requests/sec, sustaining tens of trillions of API calls.
+When properly configured, SAN booting from FSx for ONTAP can help reduce storage costs at scale while simplifying HA/DR operations.
 
-- Amazon ElastiCache: Served 1.5 quadrillion daily requests and 1.4T per minute.
+---
 
-- Amazon Kinesis: Peaked at 807M records/sec.
+## Two Primary Use Cases for SAN Boot with FSx for ONTAP
 
-- Amazon SQS: Hit 166M messages/sec.
+### 1. Reducing Boot Volume Costs
 
-- Amazon GuardDuty: Monitored 8.9T log events/hour (+48.9% vs 2024).
+In on-premises environments, SAN boot is commonly used to reduce costs when deploying hundreds of servers with nearly identical boot volumes. This principle also applies in the cloud when using iSCSI boot with FSx for ONTAP.
 
-- AWS CloudTrail: Processed 2.5T events, up from 976B in 2024.
+By leveraging thin provisioning and snapshot-based cloning, the storage requirements for 100 to 200 boot volumes are only marginally higher than a single boot volume. Each server only consumes capacity for its unique differences from the golden image, dramatically reducing overall storage usage.
 
-## Preparing to Scale – AWS Countdown:
+Furthermore, by following the best practices mentioned later in this article, you can avoid provisioning dedicated IOPS for boot volumes thanks to FSx for ONTAP's performance pooling capability. The result is significant cost savings while maintaining consistent performance.
 
-- Formerly known as AWS Infrastructure Event Management (IEM).
+### 2. Simplifying HA/DR and OS Lifecycle Management
 
-- Comprehensive support for:
+OS updates and configuration changes are frequent requirements in enterprise workloads. Using SAN boot optimizes HA/DR workflows by replicating boot volumes across multiple Availability Zones (AZs) and remote AWS Regions.
 
-- Operational readiness & risk mitigation.
+FSx for ONTAP supports both multi-AZ replication and long-distance replication, so any changes to the OS or boot volume are automatically synchronized and always in a highly available state. This significantly reduces the manual steps required for recovery during incidents while limiting the risk of human error, making it easier to meet stringent recovery time objectives (RTO).
 
-- Generative AI implementation.
+Additionally, updates can be deployed first on a clone of the golden image, thoroughly tested, and only promoted to production once validated, streamlining the OS update process and minimizing disruption.
 
-- Migration & modernization (including mainframe).
+---
 
-- Infrastructure optimization for elections, retail, healthcare, sports, and gaming.
+## How SAN Boot from FSx for ONTAP Volumes Works
 
-## 🌍 Global Impact & Customer Experience
+To perform SAN boot from FSx for ONTAP, we use the concept of a network-based chain-loader boot device, sometimes called "jumpboot."
 
-- **Customer Savings:** Prime members worldwide saved billions of dollars across diverse categories from electronics to household essentials.
+Initially, the EC2 instance quickly boots a compact, locked-down OS from a 1 GB EBS volume containing the Preboot eXecution Environment (iPXE). iPXE then chain-boots to a volume storing the actual Linux or Windows OS located on FSx for ONTAP.
 
-- **Reach:** Tens of millions of Prime members shopped globally, with participation spanning over 20 countries.
+Users can compile their own iPXE Amazon Machine Image (AMI) or use the AWS certified iPXE AMI available in every AWS Region as a community AMI. This chain-loading mechanism still allows integration with the Amazon EC2 console for operations like launch, start, stop, or using the serial console.
 
-- **Sustainability:** Amazon leveraged renewable energy-powered AWS data centers and optimized delivery routes, reducing carbon emissions during the event.
+How does iPXE know which FSx for ONTAP and iSCSI volume to boot from? When launching an EC2 instance with the iPXE AMI, we pass that information in the user data script, and iPXE then chain-boots the new OS stored on the specified block volume.
 
-## 🛒AI-Powered Shopping Transformation
+---
 
-- **Alexa+:** Millions of customers used the new voice-first shopping assistant to ask questions, discover deals, and place orders.
+## Practical Considerations and Best Practices
 
-- **Rufus AI Assistant:** Delivered personalized recommendations in real time, backed by 87,000 Inferentia & Trainium chips.
+Booting from SAN using FSx for ONTAP in AWS brings several considerations for planning and operations, similar to traditional on-premises SAN environments, with some cloud-specific best practices.
 
-- **AI Shopping Guides:** Helped customers compare products quickly, leading to higher conversion rates and customer satisfaction.
+### OS Licensing
 
-## 📈Engineering & Operational Excellence
+Boot volumes are typically cloned, so each instance must fully comply with corresponding licensing requirements, especially for commercial operating systems like Microsoft Windows.
 
-- **Fault Resilience:** Over 6,800 AWS FIS experiments were conducted to simulate outages and guarantee 99.99% uptime.
+### Storage Placement
 
-- **Global CDN:** Amazon CloudFront reduced latency for customers across continents, ensuring sub-second response times even at traffic peaks.
+Unless there are specific requirements otherwise, it's best to place both boot volumes and data volumes for an EC2 instance on the same FSx for ONTAP system. This ensures optimal data locality and maintains consistent performance.
 
-- **Hybrid Deployments:** AWS Outposts supported fulfillment centers with low-latency robotics control, while AWS Regions handled massive web traffic.
+### Avoiding Boot Storms
 
- ## 🧩Lessons & Takeaways
+Another important best practice is avoiding concentrating too many boot volumes on a single FSx for ONTAP system. In large-scale recovery scenarios, often called "boot storms," this can lead to boot time delays.
 
-- **Elastic Scalability:** AWS proved its ability to scale to record-breaking levels without disruption, showing enterprises how to prepare for Black Friday, holiday sales, and large-scale launches.
+Fortunately, unlike traditional on-premises systems, in AWS there's virtually no significant cost difference when distributing the same storage capacity across multiple FSx for ONTAP systems. This allows you to scale horizontally without incurring major additional costs, ensuring boot storms are avoided.
 
-- **Generative AI Integration:** Prime Day highlighted the future of retail: personalized, conversational, AI-assisted shopping experiences at global scale.
+For example, an FSx for ONTAP system with 50 TB SSD capacity, by default and without provisioning dedicated IOPS, can achieve up to 150,000 IOPS. If this system supports SAN boot for 200 servers, during the boot phase each server would average 750 IOPS per second—more than six times faster than a typical HDD. Because applications and boot are co-located, there's no application IO contending with the boot process during startup.
 
-- **Blueprint for Others:** Enterprises can replicate these best practices using AWS Countdown for migration, modernization, and high-stakes events.
+### Multipathing Configuration
 
-### 📊 Prime Day 2024 vs 2025 – AWS Key Metrics
+To prevent disruption, ensure multipathing is correctly configured and validated for all boot volumes connecting via iSCSI. Reliable path failover mechanisms are critical for maintaining both performance and fault tolerance.
 
-| Service / Metric                | Prime Day 2024                | Prime Day 2025                       | Growth / Change |
-|---------------------------------|--------------------------------|---------------------------------------|-----------------|
-| **AWS Outposts (Robot commands)** | ~201M commands/hour (baseline) | 524M+ total; 8M/hour peak             | +160%           |
-| **Amazon EC2 (Graviton)**        | ~30% of compute                | 40%+ of compute                       | +10% share      |
-| **Inferentia & Trainium**        | Tens of thousands deployed     | 87,000 chips deployed                 | Major increase  |
-| **Amazon SageMaker**             | ~300B inference requests       | 626B inference requests               | +108%           |
-| **Amazon ECS + Fargate**         | ~10.4M tasks/day               | 18.4M tasks/day                       | +77%            |
-| **AWS Lambda**                   | ~1T invocations/day            | 1.7T invocations/day                  | +70%            |
-| **API Gateway**                  | ~770B requests/day             | 1T requests/day                       | +30%            |
-| **Amazon CloudFront**            | 2.1T HTTP requests             | 3T HTTP requests                      | +43%            |
-| **Amazon EBS**                   | ~12T I/O ops peak              | 20.3T I/O ops peak (~1 exabyte/day)   | +69%            |
-| **Amazon Aurora**                | ~300B transactions             | 500B transactions                     | +67%            |
-| **Amazon DynamoDB**              | ~100M requests/sec peak        | 151M requests/sec peak                | +51%            |
-| **Amazon ElastiCache**           | ~1 quadrillion requests/day    | 1.5 quadrillion/day; 1.4T/min peak    | +50%            |
-| **Amazon Kinesis**               | ~500M records/sec peak         | 807M records/sec                      | +61%            |
-| **Amazon SQS**                   | ~120M messages/sec peak        | 166M messages/sec                     | +38%            |
-| **Amazon GuardDuty**             | ~6T log events/hour            | 8.9T log events/hour                  | +48.9%          |
-| **AWS CloudTrail**               | 976B events processed          | 2.5T events processed                 | +156%           |
+### Testing HA and Failover
 
-### 🧾 References / Evidences
+Finally, testing HA and failover configurations before production is extremely important. You can simulate a failover event by temporarily increasing the throughput capacity of the FSx for ONTAP system. This triggers a non-disruptive controller failover, allowing you to verify multipath handling and OS stability. Once confirmed successful, you can reduce throughput back to the required level.
 
-- **Prime Day 2024 data:** “How AWS powered Prime Day 2024 for record-breaking sales” – AWS Blog  
-  (https://aws.amazon.com/blogs/aws/how-aws-powered-prime-day-2024-for-record-breaking-sales/?utm_source=chatgpt.com)  
-- **Prime Day 2025 data:** “AWS services scale to new heights for Prime Day 2025: key metrics and milestones” – AWS Blog  
-  (https://aws.amazon.com/blogs/aws/aws-services-scale-to-new-heights-for-prime-day-2025-key-metrics-and-milestones/)
+---
+
+## Getting Started
+
+There are quite a few steps involved in setting up SAN boot OS in AWS with FSx for ONTAP. The best way to start is to explore the iPXE website page dedicated to AWS, and/or contact AWS directly if your organization needs to deploy SAN boot.
+
+For large-scale migration projects to SAN boot from on-premises environments or from an existing AWS environment, Cirrus Data—an AWS Partner—provides solutions that automate the entire process, including iSCSI, multipathing configuration, provisioning, and LUN mapping, all of which are complex tasks at scale.
+
+---
+
+## Is SAN Boot from FSx for ONTAP Right for You?
+
+Booting from SAN using FSx for ONTAP block storage isn't the choice for most AWS environments, but for organizations already accustomed to using SAN boot to simplify DR processes or orchestrate large-scale infrastructure with uniform OS images, this capability is now available on AWS.
+
+If you're managing a large fleet of EC2 instances requiring HA capability, failover between AZs, or cross-Region replication, FSx for ONTAP will help you significantly reduce boot volume costs while optimizing failover and DR workflows.
+
+In summary, you can absolutely apply proven SAN boot strategies in the cloud environment with AWS's scale and durability.
+
+---
+
+## Tags
+
+Amazon EC2, Amazon FSx for NetApp ONTAP, AWS Partner Network, AWS Storage, Data Migration
+
+---
+
+## About the Author
+
+**Randy Seamans** is a veteran storage industry expert and Principal Storage Specialist & Advocate for AWS, specializing in High Performance Storage (HPC/AI), Enterprise Storage, and Disaster Recovery.
+
+For more insights and fun about Storage, follow him at: https://www.linkedin.com/in/storageperformance
