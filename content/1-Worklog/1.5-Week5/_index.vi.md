@@ -5,7 +5,6 @@ weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-
 ### **Mục tiêu Tuần 5**
 
 * Hiểu IAM cơ bản: users, roles, và permission policies.
@@ -18,13 +17,13 @@ pre: " <b> 1.5. </b> "
 
 ### Các công việc trong tuần:
 
-| Ngày | Công việc                  | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
-| ---- | -------------------------- | ------------ | --------------- | ------------------ |
-| 2    | Share Responsibility Model | 10/09/2025   | 10/09/2025      | tiếp tục           |
-| 3    | IAM                        | 10/10/2025   | 10/10/2025      | tiếp tục           |
-| 4    | Cognito                    | 10/11/2025   | 10/11/2025      | tiếp tục           |
-| 5    | AWS Organizations, SSO     | 10/12/2025   | 10/12/2025      | tiếp tục           |
-| 6    | KMS, ECS, EKS              | 10/13/2025   | 10/13/2025      | tiếp tục           |
+| Ngày | Công việc                | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                                                                                       |
+| ----- | -------------------------- | ---------------- | ------------------ | ----------------------------------------------------------------------------------------------------------- |
+| 2     | Share Responsibility Model | 10/09/2025       | 10/09/2025         | [YouTube Video](https://www.youtube.com/watch?v=tsobAlSg19g&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=150) |
+| 3     | IAM                        | 10/10/2025       | 10/10/2025         | tiếp tục                                                                                                  |
+| 4     | Cognito                    | 10/11/2025       | 10/11/2025         | tiếp tục                                                                                                  |
+| 5     | AWS Organizations, SSO     | 10/12/2025       | 10/12/2025         | tiếp tục                                                                                                  |
+| 6     | KMS, ECS, EKS              | 10/13/2025       | 10/13/2025         | tiếp tục                                                                                                  |
 
 ### Kết quả đạt được:
 
