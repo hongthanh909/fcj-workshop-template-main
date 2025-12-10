@@ -5,11 +5,6 @@ weight: 7
 chapter: false
 pre: " <b> 7. </b> "
 ---
-
-# Sharing and Feedback
-
----
-
 ## Overall Evaluation
 
 **1. Working Environment**
@@ -67,4 +62,3 @@ Yes, I would be interested in continuing with the program, provided it does not 
 **Any other comments (free sharing):**
 
 I am grateful for this opportunity and the valuable experiences gained during my time with the First Cloud Journey program.
-

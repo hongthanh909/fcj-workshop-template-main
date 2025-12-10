@@ -5,11 +5,6 @@ weight: 7
 chapter: false
 pre: " <b> 7. </b> "
 ---
-
-# Chia sẻ và Phản hồi
-
----
-
 ## Đánh giá chung
 
 **1. Môi trường làm việc**

@@ -5,14 +5,11 @@ weight: 4
 chapter: false
 pre: " <b> 4. </b> "
 ---
-
-# CÁC SỰ KIỆN ĐÃ THAM GIA
-
 Trong quá trình thực tập, tôi đã có cơ hội tham gia hai workshop AWS có giá trị. Mỗi sự kiện đều mang đến trải nghiệm học tập thực hành, những hiểu biết về ngành và kiến thức thực tế giúp nâng cao hiểu biết của tôi về công nghệ đám mây.
 
 ---
 
-## [Sự kiện 1: AI/ML, GenAI & Amazon Bedrock trên AWS](4.1-Event1/)
+## [Sự kiện 1: AI/ML, GenAI &amp; Amazon Bedrock trên AWS](4.1-Event1/)
 
 **Tên sự kiện:** AI/ML, GenAI & Amazon Bedrock Workshop
 
@@ -32,6 +29,7 @@ Workshop này cung cấp cái nhìn tổng quan toàn diện về AI stack hiệ
 - **AWS AI Services**: Rekognition, Textract, Transcribe, Translate, Polly, Comprehend
 
 **Bài học rút ra:**
+
 - GenAI là một kiến trúc hệ thống hoàn chỉnh, không chỉ là một model đơn lẻ
 - RAG + Embeddings tạo nền tảng cho các giải pháp GenAI doanh nghiệp
 - Prompts tốt hơn dẫn đến kết quả AI tốt hơn
@@ -59,6 +57,7 @@ Workshop này tập trung vào các thực hành DevOps hiện đại và Infras
 - **AWS Container Services**: ECR, ECS, EKS, và App Runner
 
 **Bài học rút ra:**
+
 - IaC loại bỏ configuration drift thủ công và lỗi con người
 - CDK cho phép phát triển nhanh hơn với các patterns có thể tái sử dụng
 - ECS lý tưởng cho sự đơn giản; EKS cho khả năng Kubernetes đầy đủ
@@ -85,6 +84,7 @@ Workshop này khám phá cách AI tạo sinh biến đổi vòng đời phát tr
 - **Cải thiện năng suất**: Viết code nhanh hơn 40%, giảm 60% boilerplate, giảm 50% thời gian tài liệu
 
 **Bài học rút ra:**
+
 - AI biến đổi mọi giai đoạn của vòng đời phát triển
 - Amazon Q Developer mạnh mẽ cho phát triển tập trung AWS
 - Kiro xuất sắc trong việc hiểu cấp dự án và thao tác đa file
@@ -112,6 +112,7 @@ Workshop này tập trung vào Security Pillar trong AWS Well-Architected Framew
 - **Incident Response**: IR playbooks, tự động phản ứng với Lambda/Step Functions
 
 **Bài học rút ra:**
+
 - Bảo mật cloud theo mô hình shared responsibility
 - Thiết kế giải pháp với defense in depth qua nhiều lớp
 - Xây dựng IR playbooks trước khi sự cố xảy ra và tự động hóa phản ứng

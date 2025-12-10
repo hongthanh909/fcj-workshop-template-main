@@ -5,14 +5,11 @@ weight: 4
 chapter: false
 pre: " <b> 4. </b> "
 ---
-
-# EVENTS PARTICIPATED
-
 During my internship, I had the opportunity to participate in two valuable AWS workshops. Each event provided hands-on learning experiences, industry insights, and practical knowledge that enhanced my understanding of cloud technologies.
 
 ---
 
-## [Event 1: AI/ML, GenAI & Amazon Bedrock on AWS](4.1-Event1/)
+## [Event 1: AI/ML, GenAI &amp; Amazon Bedrock on AWS](4.1-Event1/)
 
 **Event Name:** AI/ML, GenAI & Amazon Bedrock Workshop
 
@@ -32,6 +29,7 @@ This workshop provided a comprehensive overview of the modern AI stack on AWS, c
 - **AWS AI Services**: Rekognition, Textract, Transcribe, Translate, Polly, Comprehend
 
 **Key Takeaways:**
+
 - GenAI is a full system architecture, not just a single model
 - RAG + Embeddings form the foundation for enterprise GenAI solutions
 - Better prompts lead to better AI outcomes
@@ -59,6 +57,7 @@ This workshop focused on modern DevOps practices and Infrastructure as Code (IaC
 - **AWS Container Services**: ECR, ECS, EKS, and App Runner
 
 **Key Takeaways:**
+
 - IaC eliminates manual configuration drift and human errors
 - CDK enables faster development with reusable patterns
 - ECS is ideal for simplicity; EKS for full Kubernetes capabilities
@@ -85,6 +84,7 @@ This workshop explored how generative AI transforms the software development lif
 - **Productivity Gains**: 40% faster code writing, 60% less boilerplate, 50% less documentation time
 
 **Key Takeaways:**
+
 - AI transforms every phase of the development lifecycle
 - Amazon Q Developer is powerful for AWS-centric development
 - Kiro excels at project-level understanding and multi-file operations
@@ -112,6 +112,7 @@ This workshop focused on the Security Pillar within the AWS Well-Architected Fra
 - **Incident Response**: IR playbooks, automated response with Lambda/Step Functions
 
 **Key Takeaways:**
+
 - Cloud security follows a shared responsibility model
 - Architect solutions using defense in depth across multiple layers
 - Build IR playbooks before incidents occur and automate response
@@ -127,4 +128,3 @@ Participating in these events helped me:
 - Gain practical knowledge of container orchestration services
 - Network with AWS Community Builders and industry professionals
 - Apply modern cloud practices to real-world projects
-
