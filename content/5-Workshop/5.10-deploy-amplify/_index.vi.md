@@ -8,63 +8,224 @@ pre: " <b> 5.10. </b> "
 
 #### Tổng quan
 
-Trong bước này, bạn sẽ deploy frontend Next.js application lên AWS Amplify.
+Bước cuối cùng là triển khai frontend Next.js 15 lên AWS Amplify với tích hợp GitLab để tự động deploy khi có code mới được push.
 
-#### Thiết lập Amplify
+#### Bước 1: Chuẩn bị Frontend Code
 
-1. Vào **AWS Amplify** Console
-2. Click **New app** > **Host web app**
-3. Chọn **GitLab** làm source
-4. Authorize GitLab access
-5. Chọn repository `everyonecook`
-6. Chọn branch `main`
+**1. Kiểm tra cấu trúc Frontend**
 
-#### Cấu hình Build Settings
+```bash
+cd frontend
+
+# Kiểm tra package.json
+cat package.json
+
+# Phải hiển thị Next.js 15
+```
+
+**2. Test Frontend trên Local**
+
+```bash
+# Cài đặt dependencies
+npm install
+
+# Chạy development server
+npm run dev
+
+# Mở http://localhost:3000
+```
+
+**3. Build Frontend**
+
+```bash
+# Build cho production
+npm run build
+
+# Test production build
+npm start
+```
+
+#### Bước 2: Tạo Amplify App
+
+**1. Vào AWS Amplify Console**
+
+1. Mở AWS Console
+2. Tìm kiếm "Amplify"
+3. Click "Get started" hoặc "New app"
+
+**2. Kết nối với GitLab**
+
+1. Chọn "Host web app"
+2. Chọn "GitLab"
+3. Click "Connect branch"
+4. Authorize AWS Amplify truy cập GitLab
+
+![Amplify GitLab Connection](/images/5-Workshop/5.10-deploy-amplify/amplify-gitlab-connect.png)
+*Screenshot: Amplify hiển thị kết nối GitLab*
+
+**3. Chọn Repository**
+
+1. Chọn repository: `everyonecook`
+2. Chọn branch: `main` (hoặc `dev` cho development)
+3. Click "Next"
+
+#### Bước 3: Cấu hình Build Settings
+
+**1. App Name**
+
+```
+App name: everyonecook-frontend
+```
+
+**2. Build Settings**
+
+Amplify tự động nhận diện Next.js, nhưng hãy kiểm tra:
 
 ```yaml
 version: 1
-frontend:
-  phases:
-    preBuild:
-      commands:
-        - cd frontend
-        - npm ci
-    build:
-      commands:
-        - npm run build
-  artifacts:
-    baseDirectory: frontend/.next
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - frontend/node_modules/**/*
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - export HUSKY=0
+            - npm install --legacy-peer-deps --ignore-scripts
+        build:
+          commands:
+            - echo "=== Creating .env.production from Amplify env vars ==="
+            - rm -f .env.production
+            - env | grep -e NEXT_PUBLIC_ > .env.production || true
+            - echo "=== .env.production content ==="
+            - cat .env.production
+            - echo "=== Building frontend ==="
+            - npm run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+          - .next/cache/**/*
+    appRoot: frontend
 ```
 
-#### Environment Variables
+**3. Advanced Settings**
 
-Thêm các environment variables trong Amplify Console:
+Thêm environment variables:
+```
+NEXT_PUBLIC_API_URL=https://api.everyonecook.cloud
+NEXT_PUBLIC_CDN_URL=https://cdn.everyonecook.cloud
+NEXT_PUBLIC_USER_POOL_ID=us-east-1_ABC123
+NEXT_PUBLIC_USER_POOL_CLIENT_ID=abc123def456
+NEXT_PUBLIC_REGION=us-east-1
+```
 
-| Variable | Value |
-|----------|-------|
-| `NEXT_PUBLIC_API_URL` | `https://api-dev.everyonecook.cloud` |
-| `NEXT_PUBLIC_CDN_URL` | `https://cdn-dev.everyonecook.cloud` |
-| `NEXT_PUBLIC_COGNITO_USER_POOL_ID` | `ap-southeast-1_XXXXXXXX` |
-| `NEXT_PUBLIC_COGNITO_CLIENT_ID` | `xxxxxxxxxxxxxxxxxxxxxxxxxx` |
+![Amplify Environment Variables](/images/5-Workshop/5.10-deploy-amplify/amplify-env-vars.png)
+*Screenshot: Cấu hình environment variables trong Amplify*
 
-#### Custom Domain
+#### Bước 4: Deploy Frontend
 
-1. Vào **Domain management**
-2. Click **Add domain**
-3. Nhập `dev.everyonecook.cloud`
-4. Cấu hình SSL certificate
+**1. Bắt đầu Deployment**
 
-#### Deploy
+Click "Save and deploy"
 
-Amplify tự động deploy khi push code lên GitLab.
+Amplify sẽ:
+1. Clone repository từ GitLab
+2. Cài đặt dependencies
+3. Build Next.js app
+4. Deploy lên CDN
+5. Cấu hình domain
 
----
+**2. Theo dõi Deployment**
 
-### Bước tiếp theo
+Theo dõi tiến trình deployment:
+- Provision
+- Build
+- Deploy
+- Verify
 
-➡️ **[5.11 - Dọn dẹp tài nguyên](../5.11-cleanup/)** - Xóa tài nguyên để tránh chi phí
+**3. Chờ hoàn thành**
+
+Deployment mất khoảng 5-10 phút.
+
+![Amplify Deployment Success](/images/5-Workshop/5.10-deploy-amplify/amplify-success.png)
+*Screenshot: Amplify hiển thị deployment thành công*
+
+#### Bước 5: Cấu hình Custom Domain
+
+**1. Thêm Custom Domain**
+
+1. Vào Amplify app → Domain management
+2. Click "Add domain"
+3. Nhập domain: `everyonecook.cloud`
+4. Amplify sẽ tự động cấu hình:
+   - Root domain: `everyonecook.cloud`
+   - WWW subdomain: `www.everyonecook.cloud`
+
+**2. Cấu hình DNS**
+
+Amplify tự động tạo DNS records trong Route 53:
+```
+everyonecook.cloud → A record → Amplify
+www.everyonecook.cloud → CNAME → Amplify
+```
+
+**3. SSL Certificate**
+
+Amplify tự động cấp SSL certificate qua ACM.
+
+**4. Chờ DNS Propagation**
+
+Mất khoảng 5-15 phút.
+
+![Amplify Custom Domain](/images/5-Workshop/5.10-deploy-amplify/amplify-custom-domain.png)
+*Screenshot: Amplify hiển thị custom domain đã cấu hình*
+
+#### Bước 6: Xác nhận Deployment
+
+**1. Truy cập Frontend**
+
+```bash
+# Qua Amplify domain
+curl -I https://main.d1234567890.amplifyapp.com
+
+# Qua custom domain
+curl -I https://everyonecook.cloud
+
+# Phải trả về 200 OK
+```
+
+**2. Test các tính năng Frontend**
+
+1. Mở https://everyonecook.cloud trong trình duyệt
+2. Test đăng ký user
+3. Test đăng nhập
+4. Test tạo posts
+5. Test tạo recipes
+6. Test các tính năng AI
+
+![Frontend Live](/images/5-Workshop/5.10-deploy-amplify/domain.png)
+*Screenshot: Trình duyệt hiển thị EveryoneCook frontend đang hoạt động*
+
+#### Best Practices
+
+1. **Sử dụng Environment Variables**: Không bao giờ hardcode API URLs
+2. **Bật Auto-Deploy**: Tự động deploy khi push code
+3. **Nhiều Environments**: Tách biệt dev và prod
+4. **Theo dõi Performance**: Sử dụng Amplify metrics
+5. **Thiết lập Notifications**: Nhận thông báo khi build thất bại
+6. **Sử dụng Custom Domain**: Chuyên nghiệp hơn
+7. **Bật HTTPS**: Luôn sử dụng SSL
+8. **Cấu hình Headers**: Security headers để bảo vệ
+
+#### Bước tiếp theo
+
+Chúc mừng! Ứng dụng của bạn đã được triển khai hoàn chỉnh:
+- ✅ Infrastructure trên AWS
+- ✅ Backend APIs đang chạy
+- ✅ Frontend trên Amplify
+- ✅ Code trên GitLab
+- ✅ CI/CD đã cấu hình
+
+Tiếp tục đến [Dọn dẹp tài nguyên](../5.11-cleanup/) khi bạn đã test xong, hoặc bắt đầu sử dụng ứng dụng!
