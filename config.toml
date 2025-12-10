@@ -5,7 +5,7 @@ canonifyURLs = true
 theme = "hugo-theme-learn"
 
 languageCode = "en"
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 defaultContentLanguage = "en"
 hasCJKLanguage = true
 
