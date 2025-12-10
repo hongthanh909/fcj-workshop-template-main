@@ -36,16 +36,16 @@ pre: " <b> 4.4. </b> "
 
 # Agenda
 
-| Time | Topic | Speaker |
-|------|-------|---------|
-| 8:30 – 8:50 AM | Opening & Security Foundations | Tran Toan Cong Ly |
-| 8:50 – 9:30 AM | Pillar 1: Identity & Access Management | Hoang Anh |
-| 9:30 – 9:55 AM | Pillar 2: Detection | Tran Duc Anh, Nguyen Tuan Thinh, Nguyen Do Thanh Dat |
-| 9:55 – 10:10 AM | Coffee Break | - |
-| 10:10 – 10:40 AM | Pillar 3: Infrastructure Protection | Hoang Kha |
-| 10:40 – 11:10 AM | Pillar 4: Data Protection | Thinh Lam, Viet Nguyen |
-| 11:10 – 11:40 AM | Pillar 5: Incident Response | Mende Grabski (Long), Tinh Truong |
-| 11:40 AM – 12:00 PM | Wrap-Up & Q&A | All |
+| Time                 | Topic                                  | Speaker                                              |
+| -------------------- | -------------------------------------- | ---------------------------------------------------- |
+| 8:30 – 8:50 AM      | Opening & Security Foundations         | Tran Toan Cong Ly                                    |
+| 8:50 – 9:30 AM      | Pillar 1: Identity & Access Management | Hoang Anh                                            |
+| 9:30 – 9:55 AM      | Pillar 2: Detection                    | Tran Duc Anh, Nguyen Tuan Thinh, Nguyen Do Thanh Dat |
+| 9:55 – 10:10 AM     | Coffee Break                           | -                                                    |
+| 10:10 – 10:40 AM    | Pillar 3: Infrastructure Protection    | Hoang Kha                                            |
+| 10:40 – 11:10 AM    | Pillar 4: Data Protection              | Thinh Lam, Viet Nguyen                               |
+| 11:10 – 11:40 AM    | Pillar 5: Incident Response            | Mende Grabski (Long), Tinh Truong                    |
+| 11:40 AM – 12:00 PM | Wrap-Up & Q&A                          | All                                                  |
 
 ---
 
@@ -66,7 +66,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Pillar 1 — Identity & Access Management (IAM)
+## Pillar 1 — Identity & Access Management (IAM)
 
 ### 8:50 – 9:30 AM — Modern IAM Architecture
 
@@ -88,7 +88,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Pillar 2 — Detection
+## Pillar 2 — Detection
 
 ### 9:30 – 9:55 AM — Continuous Monitoring & Threat Detection
 
@@ -109,7 +109,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Pillar 3 — Infrastructure Protection
+## Pillar 3 — Infrastructure Protection
 
 ### 10:10 – 10:40 AM — Securing Network & Workloads
 
@@ -134,7 +134,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Pillar 4 — Data Protection
+## Pillar 4 — Data Protection
 
 ### 10:40 – 11:10 AM — Encryption, Key Management & Secrets
 
@@ -159,7 +159,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Pillar 5 — Incident Response
+## Pillar 5 — Incident Response
 
 ### 11:10 – 11:40 AM — Playbooks & Automated Incident Response
 
