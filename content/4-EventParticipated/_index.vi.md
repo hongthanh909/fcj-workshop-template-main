@@ -66,6 +66,58 @@ Workshop này tập trung vào các thực hành DevOps hiện đại và Infras
 
 ---
 
+## [Sự kiện 3: AI-Driven Development Life Cycle](4.3-Event3/)
+
+**Tên sự kiện:** AI-Driven Development Life Cycle
+
+**Thời gian:** Thứ Sáu, 3 tháng 10, 2024 | 2:00 PM – 4:30 PM
+
+**Địa điểm:** AWS Event Hall, Tầng 26 Tòa nhà Bitexco, TP.HCM
+
+**Vai trò:** Người tham dự
+
+**Tóm tắt:**
+
+Workshop này khám phá cách AI tạo sinh biến đổi vòng đời phát triển phần mềm thông qua Amazon Q Developer và Kiro AI Assistant. Các chủ đề chính bao gồm:
+
+- **Amazon Q Developer**: Tạo code, hỗ trợ debug, tích hợp AWS
+- **Kiro AI Assistant**: Hoàn thành code thông minh, hiểu đa file, refactoring tự động
+- **Cải thiện năng suất**: Viết code nhanh hơn 40%, giảm 60% boilerplate, giảm 50% thời gian tài liệu
+
+**Bài học rút ra:**
+- AI biến đổi mọi giai đoạn của vòng đời phát triển
+- Amazon Q Developer mạnh mẽ cho phát triển tập trung AWS
+- Kiro xuất sắc trong việc hiểu cấp dự án và thao tác đa file
+
+---
+
+## [Sự kiện 4: AWS Well-Architected Security Pillar Workshop](4.4-Event4/)
+
+**Tên sự kiện:** AWS Well-Architected Security Pillar Workshop
+
+**Thời gian:** Thứ Sáu, 29 tháng 11, 2025 | 8:30 AM – 12:00 PM
+
+**Địa điểm:** Văn phòng AWS Vietnam, Tòa nhà Bitexco Financial Tower, Quận 1, TP.HCM
+
+**Vai trò:** Người tham dự
+
+**Tóm tắt:**
+
+Workshop này tập trung vào Security Pillar trong AWS Well-Architected Framework, bao gồm 5 trụ cột bảo mật cốt lõi với demo thực tế. Các chủ đề chính bao gồm:
+
+- **Identity & Access Management**: IAM best practices, SSO, MFA, Access Analyzer
+- **Detection**: CloudTrail, GuardDuty, Security Hub, VPC Flow Logs
+- **Infrastructure Protection**: Phân đoạn VPC, WAF, Shield, Network Firewall
+- **Data Protection**: KMS, mã hóa at rest/in transit, Secrets Manager
+- **Incident Response**: IR playbooks, tự động phản ứng với Lambda/Step Functions
+
+**Bài học rút ra:**
+- Bảo mật cloud theo mô hình shared responsibility
+- Thiết kế giải pháp với defense in depth qua nhiều lớp
+- Xây dựng IR playbooks trước khi sự cố xảy ra và tự động hóa phản ứng
+
+---
+
 ## Giá trị đạt được
 
 Việc tham gia các sự kiện này đã giúp tôi:
