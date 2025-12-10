@@ -1,4 +1,4 @@
-baseURL = "https://hongthanh909.github.io/fcj-workshop-template-main/"
+﻿baseURL = "https://hongthanh909.github.io/fcj-workshop-template-main/"
 relativeURLs = false
 canonifyURLs = true
 
@@ -15,7 +15,7 @@ home = [ "HTML", "RSS", "JSON"]
 [params]
   themeVariant = "workshop"
   description = ""
-  author = "ducnqse182087@fpt.edu.vn"
+  author = "HongNTSE183239@fpt.edu.vn"
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false
@@ -33,9 +33,9 @@ home = [ "HTML", "RSS", "JSON"]
   weight = 20
 
   [languages.vi]
-  title = "Báo cáo thực tập"
+  title = "Bao cao thuc tap"
   weight = 2
-  languageName = "Tiếng Việt"
+  languageName = "Tieng Viet"
 
   [[languages.vi.menu.shortcuts]]
   name = "<i class='fab fa-facebook'></i> AWS Study Group"
