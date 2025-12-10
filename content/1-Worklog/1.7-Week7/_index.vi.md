@@ -1,59 +1,54 @@
 ---
 title: "Worklog Tuần 7"
-date: 2025-01-01
-weight: 1
+date: 2025-10-16
+weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 7:
 
+* Hoàn thành hands-on labs với VPC, EC2, Lambda, và Slack automation.
+* Thực hành quản lý IAM user/policy/role và tag-based access control.
+* Học KMS encryption, CloudTrail logging, và Athena log analysis.
 
-### Mục tiêu tuần 7:
+### Các công việc trong tuần:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+| Ngày | Công việc                                                          | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| ---- | ------------------------------------------------------------------ | ------------ | --------------- | ------------------ |
+| 2    | Lab22 – VPC + EC2 + Lambda + Slack Automation                      | 10/16/2025   | 10/16/2025      | Module 05 – Lab22  |
+| 3    | Lab28 – IAM User/Policy/Role + Switch Role + Tag-based EC2 Access  | 10/17/2025   | 10/17/2025      | Module 05 – Lab28  |
+| 4    | Lab30 – IAM Restriction (User Limits)                              | 10/18/2025   | 10/18/2025      | Module 05 – Lab30  |
+| 5    | Lab33 – KMS + CloudTrail + Athena                                  | 10/19/2025   | 10/19/2025      | Module 05 – Lab33  |
+| 6    | Lab44 + Lab48 – Advanced IAM + EC2/S3 Access                       | 10/20/2025   | 10/20/2025      | Module 05 – Lab44 & 48 |
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### **Kết quả đạt được Tuần 7**
 
+* Hiểu rõ về AWS và cloud computing.
+* Học các nhóm dịch vụ AWS cốt lõi (Compute, Storage, Networking, Database, Security).
+* Hoàn thành hands-on labs với IAM, EC2, S3, VPC, KMS, CloudTrail, Lambda, và Athena.
+* Xây dựng kỹ năng thực tế trong automation, access control, encryption, và log analysis.
 
-### Kết quả đạt được tuần 7:
+### **VPC + EC2 + Lambda + Slack Automation**
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Tạo VPC, SG, EC2
+* Cấu hình Slack Webhook
+* Tạo IAM Role cho Lambda
+* Lambda functions để Start/Stop EC2
+* Test & Cleanup
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+### **IAM User/Policy/Role + Switch Role + Tag-based EC2 Access**
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Tạo IAM User
+* Tạo Custom IAM Policy
+* Tạo IAM Role
+* Switch Role
+* Kiểm soát EC2 access sử dụng Tags
+* Cleanup
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+### **KMS + CloudTrail + Athena**
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Tạo KMS Key
+* Tạo S3 Bucket & upload encrypted data
+* Bật CloudTrail logging đến S3
+* Query CloudTrail logs với Athena
+* Cleanup

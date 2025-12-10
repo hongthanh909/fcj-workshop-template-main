@@ -1,59 +1,72 @@
 ---
 title: "Worklog Tuần 8"
-date: 2025-01-01
-weight: 1
+date: 2025-10-23
+weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 8:
 
+* Hiểu database fundamentals: Primary Key, Foreign Key, và Normalization.
+* Học Indexing, Partitioning, và Execution Plans cho query optimization.
+* So sánh RDBMS vs NoSQL, và khái niệm OLTP vs OLAP/Data Warehouse.
 
-### Mục tiêu tuần 8:
+### Các công việc trong tuần:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+| Ngày | Công việc                                         | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| ---- | ------------------------------------------------- | ------------ | --------------- | ------------------ |
+| 2    | Khái niệm database cơ bản trên AWS & managed services | 10/23/2025   | 10/23/2025      | tiếp tục           |
+| 3    | Primary Key, Foreign Key & Normalization          | 10/24/2025   | 10/24/2025      | tiếp tục           |
+| 4    | Indexing, Partitioning & Execution Plan           | 10/25/2025   | 10/25/2025      | tiếp tục           |
+| 5    | Database Logs, Buffer Cache & Transactions        | 10/26/2025   | 10/26/2025      | tiếp tục           |
+| 6    | RDBMS vs NoSQL, OLTP vs OLAP / Data Warehouse     | 10/27/2025   | 10/27/2025      | tiếp tục           |
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Kết quả đạt được Tuần 8:
 
+#### Primary Key, Foreign Key & Normalization
 
-### Kết quả đạt được tuần 8:
+**Primary Key (PK)**
+* Xác định duy nhất mỗi record trong table.
+* Không thể trùng lặp hoặc null.
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Foreign Key (FK)**
+* Một column tham chiếu đến Primary Key của table khác.
+* Tạo relationships giữa các tables.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+**Normalization**
+* Tổ chức data để **tránh trùng lặp** và **giảm storage usage**.
+* Các dạng phổ biến: 1NF, 2NF, 3NF.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+#### Indexing, Partitioning & Execution Plan
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+**Indexing**
+* Tăng tốc data retrieval bằng cách tránh full table scans.
+* Yêu cầu extra storage và tăng write cost.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+**Partitioning**
+* Chia large tables thành các phần nhỏ hơn cho queries nhanh hơn.
+* Queries chỉ scan relevant partitions thay vì whole table.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+**Execution Plan**
+* Chiến lược step-by-step của database để chạy query.
+* Thiết yếu cho query optimization.
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+#### RDBMS vs NoSQL, OLTP vs OLAP / Data Warehouse
 
+**RDBMS (Relational Databases)**
+* Structured tables với fixed schema.
+* Strong consistency, hỗ trợ complex queries (SQL).
+* Scales vertically.
 
+**NoSQL**
+* Flexible hoặc schema-less data model.
+* High scalability, thường horizontal scaling.
+* Phù hợp cho unstructured/semi-structured data.
+
+**OLTP (Online Transaction Processing)**
+* Xử lý real-time, frequent read/write operations.
+* Dùng cho transactions như orders, payments, banking.
+
+**OLAP (Online Analytical Processing) / Data Warehouse**
+* Lưu trữ lượng lớn historical data cho analysis.
+* Hỗ trợ complex queries cho reporting và business insights.

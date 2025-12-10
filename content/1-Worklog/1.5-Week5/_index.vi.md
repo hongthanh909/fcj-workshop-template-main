@@ -1,59 +1,61 @@
 ---
 title: "Worklog Tuần 5"
-date: 2025-01-01
-weight: 1
+date: 2025-10-09
+weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### **Mục tiêu Tuần 5**
 
-### Mục tiêu tuần 5:
+* Hiểu IAM cơ bản: users, roles, và permission policies.
+* Học cách Amazon Cognito xử lý xác thực người dùng ứng dụng.
+* Làm quen với AWS Organizations cho quản lý multi-account.
+* Sử dụng AWS Identity Center (SSO) cho kiểm soát truy cập tập trung.
+* Hiểu KMS cho quản lý encryption key.
+* Phân biệt các mức trách nhiệm qua các dịch vụ AWS.
+* Nắm vững Shared Responsibility Model và xu hướng chuyển sang managed services.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc trong tuần:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc                  | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| ---- | -------------------------- | ------------ | --------------- | ------------------ |
+| 2    | Share Responsibility Model | 10/09/2025   | 10/09/2025      | tiếp tục           |
+| 3    | IAM                        | 10/10/2025   | 10/10/2025      | tiếp tục           |
+| 4    | Cognito                    | 10/11/2025   | 10/11/2025      | tiếp tục           |
+| 5    | AWS Organizations, SSO     | 10/12/2025   | 10/12/2025      | tiếp tục           |
+| 6    | KMS, ECS, EKS              | 10/13/2025   | 10/13/2025      | tiếp tục           |
 
+### Kết quả đạt được:
 
-### Kết quả đạt được tuần 5:
+#### **AWS Identity and Access Management (IAM)**
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Kiểm soát identities và permissions cho users, groups, và roles.
+* Nguyên tắc cốt lõi: **Least Privilege** – chỉ cấp quyền cần thiết.
+* Tránh sử dụng **root account**; sử dụng IAM roles/users thay thế.
+* Permissions được định nghĩa qua IAM policies (managed, custom, inline).
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+#### **Amazon Cognito – Xác thực người dùng cho ứng dụng**
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Cung cấp user sign-up, sign-in, và identity management cho web/mobile apps.
+* Hỗ trợ MFA, OAuth2, SAML, và OpenID Connect.
+* Giúp offload authentication để không phải xây dựng từ đầu.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+#### **AWS Organizations – Quản lý Multi-Account**
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+* Quản lý tập trung cho nhiều tài khoản AWS.
+* Cho phép kiểm soát chi phí, consolidated billing, và security boundaries.
+* Sử dụng **Service Control Policies (SCPs)** để enforce permissions toàn tổ chức.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+#### **AWS Identity Center (AWS SSO)**
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Đơn giản hóa đăng nhập với **single sign-on** qua các accounts và applications.
+* Cho phép gán roles cho users từ internal hoặc external directories.
+* Giảm phụ thuộc vào IAM users và long-term access keys.
 
+#### **AWS Key Management Service (KMS)**
 
+* Tạo và quản lý encryption keys cho các dịch vụ AWS.
+* Tích hợp với S3, EBS, RDS, DynamoDB, Lambda.
+* Cung cấp auditing qua CloudTrail cho key usage.
+* Hỗ trợ cả AWS-managed và customer-managed keys.

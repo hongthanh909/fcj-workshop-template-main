@@ -1,59 +1,87 @@
 ---
 title: "Worklog Tuần 3"
-date: 2025-01-01
-weight: 1
+date: 2025-09-25
+weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 3:
 
+* Hiểu EC2 cơ bản: instance types, AMI, snapshots, storage (EBS, Instance Store).
+* Thực hành labs với EC2, Storage Gateway, S3 static website, và CloudFront.
+* Học Auto Scaling, EFS, FSx, và dịch vụ VM migration.
 
-### Mục tiêu tuần 3:
+### Các công việc trong tuần:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+| Ngày | Công việc                                                           | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| ---- | ------------------------------------------------------------------- | ------------ | --------------- | ------------------ |
+| 2    | Compute VM trên AWS                                                 | 09/25/2025   | 09/25/2025      | [VM on AWS](https://www.youtube.com/watch?v=-t5h4N6vfBs) |
+| 3    | Giới thiệu EC2                                                      | 09/26/2025   | 09/26/2025      | [EC2](https://www.youtube.com/watch?v=e7XeKdOVq40) |
+| 4    | EC2 (Lab)<br />- EC2 & Infrastructure<br />- Storage Gateway        | 09/27/2025   | 09/27/2025      | tiếp tục |
+| 5    | Lab (tiếp)<br />-S3 & Static Website<br />-S3 Security & CloudFront | 09/28/2025   | 09/28/2025      | [S3](https://www.youtube.com/watch?v=_yunukwcAwc) |
+| 6    | Tổng kết kiến thức tuần                                             | 09/29/2025   | 09/29/2025      | |
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Kết quả đạt được
 
+### 1. EC2 Cơ bản
 
-### Kết quả đạt được tuần 3:
+- Virtual servers trên AWS.
+- **Khởi động nhanh**, **cấu hình linh hoạt**, **chi phí giảm theo thời gian**.
+- **Elasticity**: scale up/down theo nhu cầu.
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+### 2. Instance Types & CPU
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+- **Intel**: hiệu suất cao, chi phí cao.
+- **AMD**: rẻ hơn ~10%.
+- **Graviton (ARM)**: rẻ hơn đến 40%, hiệu suất/giá tốt (Linux).
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+### 3. AMI
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+- Template cho EC2.
+- Bao gồm: **OS (root vol), permissions, block device mapping**.
+- Loại: AWS, Marketplace, Custom (Golden Image).
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+### 4. Snapshot & Backup
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+- Lần đầu = full, sau đó = incremental.
+- Lưu trữ trong **S3**.
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+### 5. Storage
 
+- **EBS**: persistent, replicated (SSD/HDD), hỗ trợ Multi-Attach.
+- **Instance Store**: NVMe, siêu nhanh nhưng ephemeral (cache, logs, swap).
 
+### EC2 (Lab)
+
+### 1. EC2 & Infrastructure
+
+* **Lab13-02.1** – Tạo S3 Bucket.
+* **Lab13-02.2** – Deploy infrastructure.
+* **Lab13-03** – Tạo Backup plan.
+* **Lab13-05** – Test Restore.
+* **Lab13-06** – Dọn dẹp tài nguyên.
+
+### 2. Storage Gateway
+
+* **Lab24-01.2** – Tạo EC2 cho Storage Gateway.
+* **Lab24-02.1** – Tạo Storage Gateway.
+* **Lab24-02.2** – Tạo File Shares.
+
+### 3. S3 & Static Website
+
+* **Lab57-02.1** – Tạo S3 bucket.
+* **Lab57-02.2** – Load data.
+* **Lab57-03** – Bật tính năng static website.
+* **Lab57-04** – Cấu hình public access.
+* **Lab57-05** – Cấu hình public objects.
+* **Lab57-06** – Test website.
+
+### 4. S3 Security & CloudFront
+
+* **Lab57-07.1** – Block all public access.
+* **Lab57-07.2** – Cấu hình Amazon CloudFront.
+* **Lab57-07.3** – Test Amazon CloudFront.
+* **Lab57-08** – Bucket Versioning.
+* **Lab57-09** – Move objects.
+* **Lab57-10** – Replication Object multi-region.
+* **Lab57-11** – Dọn dẹp tài nguyên.

@@ -1,58 +1,90 @@
 ---
 title: "Worklog Tuần 12"
-date: 2025-01-01
-weight: 2
+date: 2025-11-27
+weight: 12
 chapter: false
-pre: " <b> 1.12 </b> "
+pre: " <b> 1.12. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+## Tuần 12: AI Module & Kiểm thử End-to-End
 
-### Mục tiêu tuần 12:
+### Mục tiêu Tuần 12:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Kiểm thử AI recipe suggestion flow và Bedrock integration.
+* Sửa friend-based privacy filtering và TypeScript errors.
+* Thực hiện end-to-end testing cho toàn bộ ứng dụng.
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Các công việc trong tuần:
 
+| Ngày | Công việc                                              | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo     |
+| ---- | ------------------------------------------------------ | ------------ | --------------- | ---------------------- |
+| 2    | Test AI Suggestions - Cache matching logic             | 11/27/2025   | 11/27/2025      | suggestion.handler.ts  |
+| 3    | Test Recipe CRUD - Create/Update/Delete                | 11/28/2025   | 11/28/2025      | ai-module/index.ts     |
+| 4    | Fix TODO: Friend-based privacy filtering cho posts     | 11/29/2025   | 11/29/2025      | post.service.ts:757    |
+| 5    | Fix TODO: Recipe-group handler TypeScript errors       | 11/30/2025   | 11/30/2025      | social-module/index.ts |
+| 6    | End-to-end testing - Full user journey                 | 12/01/2025   | 12/01/2025      | All modules            |
 
-### Kết quả đạt được tuần 12:
+### Kết quả đạt được Tuần 12:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+- Xác minh AI cache matching logic hoạt động đúng
+- Sửa friend-based privacy filtering cho feed posts
+- Giải quyết TypeScript errors trong recipe-group handler
+- Hoàn thành full end-to-end testing
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+### Bugs tìm thấy & Đã sửa:
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+| Bug ID  | Mô tả                                                 | Mức độ     | Trạng thái |
+| ------- | ----------------------------------------------------- | ---------- | ---------- |
+| BUG-008 | AI cache rejected do servings mismatch                | Trung bình | Đã sửa     |
+| BUG-009 | Friend posts không hiển thị trong feed (privacy bug)  | Cao        | Đã sửa     |
+| BUG-010 | Recipe-group handler TypeScript compilation errors    | Trung bình | Đã sửa     |
+| BUG-011 | S3 image deletion không queued khi post delete        | Thấp       | Hoãn lại   |
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+---
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+## Testing Checklist
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+### Authentication & Authorization
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+- [ ] Login với valid credentials
+- [ ] Login với invalid credentials
+- [ ] Login với banned user
+- [ ] Logout và session cleanup
+- [ ] Token refresh trước khi hết hạn
+- [ ] Protected route redirect
 
+### User Profile
 
+- [ ] Xem profile của mình
+- [ ] Cập nhật thông tin profile
+- [ ] Upload avatar
+- [ ] Upload background
+- [ ] Cập nhật privacy settings
+- [ ] Xem profile người khác (với privacy)
+
+### Social Features
+
+- [ ] Tạo post (quick/recipe_share)
+- [ ] Sửa post title
+- [ ] Xóa post
+- [ ] Like/Unlike post
+- [ ] Comment trên post
+- [ ] Xóa comment
+- [ ] Report post/comment
+- [ ] Share post
+
+### Friends
+
+- [ ] Tìm kiếm users
+- [ ] Gửi friend request
+- [ ] Accept friend request
+- [ ] Reject friend request
+- [ ] Cancel sent request
+- [ ] Remove friend
+- [ ] Block/Unblock user
+
+### AI Features
+
+- [ ] Lấy recipe suggestions
+- [ ] Kiểm tra job status
+- [ ] Nutrition analysis
+- [ ] Dictionary lookup

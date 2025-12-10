@@ -1,59 +1,80 @@
 ---
 title: "Worklog Tuần 4"
-date: 2025-01-01
-weight: 1
+date: 2025-10-02
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### **Mục tiêu Tuần 4**
 
-### Mục tiêu tuần 4:
+* Hiểu Amazon S3 cơ bản và storage classes.
+* Học các tính năng S3 nâng cao: static hosting, versioning, Access Points, VPC Endpoints, Glacier.
+* Khám phá AWS Snow Family cho di chuyển dữ liệu quy mô lớn.
+* Hiểu Storage Gateway cho thiết lập hybrid storage.
+* Học chiến lược DR và sử dụng AWS Backup cho automated backups.
+* Thực hành qua labs: S3, VM Import/Export, Storage Gateway, FSx, và S3 + CloudFront.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc trong tuần:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc                                                                                                                     | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ------------------ |
+| 2    | Amazon S3 (Simple Storage Service)                                                                                            | 10/02/2025   | 10/02/2025      | tiếp tục           |
+| 3    | Amazon S3 – Tính năng nâng cao                                                                                                | 10/03/2025   | 10/03/2025      | tiếp tục           |
+| 4    | AWS Snow Family<br />AWS Storage Gateway<br />Disaster Recovery trên AWS<br />AWS Backup                                      | 10/04/2025   | 10/04/2025      | tiếp tục           |
+| 5    | Lab<br />(S3 & Backup)<br />VM Import/Export<br />Storage Gateway<br />FSx (Windows File System)<br />S3 Website & CloudFront | 10/05/2025   | 10/05/2025      | tiếp tục           |
+| 6    | Tổng kết kiến thức tuần                                                                                                       | 10/06/2025   | 10/06/2025      |                    |
 
+### Kết quả đạt được Tuần 4:
 
-### Kết quả đạt được tuần 4:
+## Amazon S3 (Simple Storage Service)
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+### 1. Khái niệm
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+- Object storage (**WORM**: Write Once, Read Many).
+- Update = ghi đè toàn bộ object.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+### 2. Tính năng chính
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+- Lưu trữ không giới hạn, tối đa 5TB/object.
+- Replicated qua **3 AZs** → high availability.
+- **Durability: 11 nines**, **Availability: 4 nines**.
+- Multipart upload, event triggers (Lambda).
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+### 3. Storage Classes
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+- **Standard** → truy cập thường xuyên.
+- **Standard-IA** → truy cập không thường xuyên.
+- **Intelligent-Tiering** → tự động tối ưu chi phí.
+- **One Zone-IA** → chi phí thấp, single AZ.
+- **Glacier/Deep Archive** → lưu trữ archive.
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+## AWS Snow Family
 
+- **Snowball**: ~80TB, transfer đến S3/Glacier.
+- **Snowball Edge**: ~100TB, với local compute.
+- **Snowmobile**: truck cho dữ liệu quy mô PB–EB.
 
+## AWS Storage Gateway
+
+- Hybrid storage: on-prem + AWS.
+- **File Gateway**: NFS/SMB → S3 objects.
+- **Volume Gateway**: block storage.
+- **Tape Gateway**: virtual tape library → S3/Glacier.
+
+## Disaster Recovery (DR) trên AWS
+
+- **RTO** = thời gian recovery.
+- **RPO** = mất dữ liệu chấp nhận được.
+
+### Chiến lược DR:
+
+1. **Backup & Restore** (baseline).
+2. **Pilot Light** (Active-Standby).
+3. **Warm Standby** (Active-Active công suất thấp).
+4. **Multi-Site** (Active-Active đầy đủ).
+
+## AWS Backup
+
+- Dịch vụ backup tập trung cho **EC2, EBS, RDS, FSx, EFS**.
+- Tính năng: **scheduling, retention, monitoring**.
