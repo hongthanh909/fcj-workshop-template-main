@@ -36,16 +36,16 @@ pre: " <b> 4.4. </b> "
 
 # Chương trình
 
-| Thời gian | Chủ đề | Diễn giả |
-|-----------|--------|----------|
-| 8:30 – 8:50 AM | Khai mạc & Nền tảng bảo mật | Tran Toan Cong Ly |
-| 8:50 – 9:30 AM | Trụ cột 1: Identity & Access Management | Hoang Anh |
-| 9:30 – 9:55 AM | Trụ cột 2: Detection | Tran Duc Anh, Nguyen Tuan Thinh, Nguyen Do Thanh Dat |
-| 9:55 – 10:10 AM | Coffee Break | - |
-| 10:10 – 10:40 AM | Trụ cột 3: Infrastructure Protection | Hoang Kha |
-| 10:40 – 11:10 AM | Trụ cột 4: Data Protection | Thinh Lam, Viet Nguyen |
-| 11:10 – 11:40 AM | Trụ cột 5: Incident Response | Mende Grabski (Long), Tinh Truong |
-| 11:40 AM – 12:00 PM | Tổng kết & Q&A | Tất cả |
+| Thời gian           | Chủ đề                                 | Diễn giả                                           |
+| -------------------- | ----------------------------------------- | ---------------------------------------------------- |
+| 8:30 – 8:50 AM      | Khai mạc & Nền tảng bảo mật          | Tran Toan Cong Ly                                    |
+| 8:50 – 9:30 AM      | Trụ cột 1: Identity & Access Management | Hoang Anh                                            |
+| 9:30 – 9:55 AM      | Trụ cột 2: Detection                    | Tran Duc Anh, Nguyen Tuan Thinh, Nguyen Do Thanh Dat |
+| 9:55 – 10:10 AM     | Coffee Break                              | -                                                    |
+| 10:10 – 10:40 AM    | Trụ cột 3: Infrastructure Protection    | Hoang Kha                                            |
+| 10:40 – 11:10 AM    | Trụ cột 4: Data Protection              | Thinh Lam, Viet Nguyen                               |
+| 11:10 – 11:40 AM    | Trụ cột 5: Incident Response            | Mende Grabski (Long), Tinh Truong                    |
+| 11:40 AM – 12:00 PM | Tổng kết & Q&A                          | Tất cả                                             |
 
 ---
 
@@ -66,7 +66,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Trụ cột 1 — Identity & Access Management (IAM)
+## Trụ cột 1 — Identity & Access Management (IAM)
 
 ### 8:50 – 9:30 AM — Kiến trúc IAM hiện đại
 
@@ -88,7 +88,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Trụ cột 2 — Detection
+## Trụ cột 2 — Detection
 
 ### 9:30 – 9:55 AM — Giám sát & Phát hiện liên tục
 
@@ -109,7 +109,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Trụ cột 3 — Infrastructure Protection
+## Trụ cột 3 — Infrastructure Protection
 
 ### 10:10 – 10:40 AM — Bảo mật hạ tầng & workload
 
@@ -134,7 +134,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Trụ cột 4 — Data Protection
+## Trụ cột 4 — Data Protection
 
 ### 10:40 – 11:10 AM — Mã hóa, quản lý key & secrets
 
@@ -159,7 +159,7 @@ pre: " <b> 4.4. </b> "
 
 ---
 
-## ⭐ Trụ cột 5 — Incident Response
+## Trụ cột 5 — Incident Response
 
 ### 11:10 – 11:40 AM — Playbook & Tự động hóa phản ứng sự cố
 
